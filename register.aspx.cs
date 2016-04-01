@@ -15,7 +15,7 @@ public partial class login_form : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-      
+
         LabelBotCheck.Text = GenerateCoupon(4);
     }
 
@@ -34,32 +34,62 @@ public partial class login_form : System.Web.UI.Page
 
     protected void ButtonRegister_Click(object sender, EventArgs e)
     {
-        ExecuteInsert(TextBoxEmail.Text, TextBoxPassword.Text, TextBoxAddress.Text, TextBoxMobile.Text);
-    }
-
-    private void ExecuteInsert(string email, string password, string address, string mobile)
-    {
-
-
-        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        var query = "INSERT INTO users (email, password, address, mobile) VALUES "
-                    + " (@email,@password,@address,@mobile)";
-        using (SqlConnection cnn = new SqlConnection(cnnString))
+        if (CheckUsernameUnique(TextBoxEmail.Text))
         {
-            using (SqlCommand cmd = new SqlCommand(query, cnn))
-            {
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@password", password);
-                cmd.Parameters.AddWithValue("@address", address);
-                cmd.Parameters.AddWithValue("@mobile", mobile);
-                cnn.Open();
-                cmd.ExecuteNonQuery();
-            }
+            //exist
+            LabelEmailExist.Text = "This email is already is registered";
+        }
+        else
+        {
+            //dont exist
+            User user = new User(TextBoxEmail.Text, TextBoxPassword.Text, TextBoxAddress.Text, TextBoxMobile.Text);
+            user.Register();
+            //redirect
         }
     }
 
-    private string GetConnectionString()
+    private Boolean CheckUsernameUnique(String email)
     {
-        return ConfigurationManager.ConnectionStrings["ConnectionString"].ToString();
+
+        var constring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+        using (SqlConnection con = new SqlConnection(constring))
+        {
+            using (SqlCommand cmd = new SqlCommand("CheckEmailExist", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.Add("@count", SqlDbType.Int).Direction = ParameterDirection.Output;
+               
+                con.Open();
+                cmd.ExecuteNonQuery();
+                int count = Convert.ToInt32(cmd.Parameters["@count"].Value);
+                if (count > 0)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+    public static string CalculateMD5Hash(string input)
+    {
+        // Use input string to calculate MD5 hash
+        using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+        {
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+            // Convert the byte array to hexadecimal string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hashBytes.Length; i++)
+            {
+                sb.Append(hashBytes[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
     }
 }

@@ -6,6 +6,7 @@
     <div class="form-signin">
         <asp:Label ID="LabelEmail" CssClass="col-md-2" runat="server" Text="Email: "></asp:Label>
         <asp:TextBox ID="TextBoxEmail" runat="server"></asp:TextBox>
+          <asp:Label ID="LabelEmailExist" runat="server" ></asp:Label>
         <asp:RequiredFieldValidator ID="RequiredFieldValidatorTextBoxEmail" runat="server" ErrorMessage="Enter email!" ControlToValidate="TextBoxEmail"></asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ErrorMessage="Please enter valid email !" ControlToValidate="TextBoxEmail" ValidationExpression=".+\@.+\..+"></asp:RegularExpressionValidator>
         <br />
