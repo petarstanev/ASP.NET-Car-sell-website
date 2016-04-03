@@ -13,7 +13,7 @@
         <asp:Label ID="LabelPassword" CssClass="col-md-2" runat="server" Text="Password: "></asp:Label>
         <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password"></asp:TextBox>
         <asp:RequiredFieldValidator ID="RequiredFieldValidatorTextBoxPassword" runat="server" ErrorMessage="Enter password!" ControlToValidate="TextBoxPassword"></asp:RequiredFieldValidator>
-         <asp:RegularExpressionValidator ID="RegularExpressionValidatorPassowrd" runat="server" ErrorMessage="Please enter password between 4 and 15 characters. Only letters, numbers and the underscore are allowed!" ControlToValidate="TextBoxPassword" ValidationExpression="^[a-zA-Z]\w{3,14}$"></asp:RegularExpressionValidator>
+         <asp:RegularExpressionValidator ID="RegularExpressionValidatorPassowrd" runat="server" ErrorMessage="Please enter password between 4 and 15 characters. Only letters, numbers and the underscore are allowed!" ControlToValidate="TextBoxPassword" ValidationExpression="^[a-zA-Z0-9]\w{3,14}$"></asp:RegularExpressionValidator>
        
         <br />
         <asp:Label ID="LabelPasswordConfirm" CssClass="col-md-2" runat="server" Text="Password confirm: "></asp:Label>

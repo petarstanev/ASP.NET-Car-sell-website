@@ -12,7 +12,7 @@ using System.Web;
 /// </summary>
 public class User
 {
-    private string email { get; set; }
+    public string email { get; set; }
 
     private string passwordHash { get; set; }
     private string address { get; set; }
@@ -105,4 +105,6 @@ public class User
         }
         return false;
     }
+
+   
 }

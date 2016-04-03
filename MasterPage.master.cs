@@ -11,4 +11,20 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
 
     }
+
+    private void Page_PreRender(object sender, System.EventArgs e)
+    {
+        if (Session["user"] != null)
+        {
+            //user is login
+            login.Visible = false;
+            register.Visible = false;
+            logout.Visible = true;
+        }
+        else
+        {
+            //user is not login 
+            logout.Visible = false;
+        }
+    }
 }

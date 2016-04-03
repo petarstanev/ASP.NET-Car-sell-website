@@ -12,6 +12,7 @@ public partial class login_form : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         LabelBotCheck.Text = GenerateCoupon(4);
+        
     }
 
 
@@ -37,7 +38,9 @@ public partial class login_form : System.Web.UI.Page
         if (user.Login())
         {
             //redirect
+            Session["user"] = user;
             Response.Redirect("login_success.aspx");
+            
         }
         else {
             LabelFailed.Text = "Wrong email or password !";
