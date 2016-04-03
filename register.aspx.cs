@@ -44,7 +44,7 @@ public partial class login_form : System.Web.UI.Page
             //dont exist
             User user = new User(TextBoxEmail.Text, TextBoxPassword.Text, TextBoxAddress.Text, TextBoxMobile.Text);
             user.Register();
-            //redirect
+            Response.Redirect("register_success.aspx");
         }
     }
 
@@ -64,6 +64,7 @@ public partial class login_form : System.Web.UI.Page
                 con.Open();
                 cmd.ExecuteNonQuery();
                 int count = Convert.ToInt32(cmd.Parameters["@count"].Value);
+                con.Close();
                 if (count > 0)
                 {
                     return true;
@@ -72,24 +73,5 @@ public partial class login_form : System.Web.UI.Page
         }
 
         return false;
-    }
-
-
-    public static string CalculateMD5Hash(string input)
-    {
-        // Use input string to calculate MD5 hash
-        using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
-        {
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-            byte[] hashBytes = md5.ComputeHash(inputBytes);
-
-            // Convert the byte array to hexadecimal string
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hashBytes.Length; i++)
-            {
-                sb.Append(hashBytes[i].ToString("X2"));
-            }
-            return sb.ToString();
-        }
     }
 }

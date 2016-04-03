@@ -13,7 +13,8 @@ using System.Web;
 public class User
 {
     private string email { get; set; }
-    private string password { get; set; }
+
+    private string passwordHash { get; set; }
     private string address { get; set; }
     private string mobile { get; set; }
     private List<Car> wishList { get; set; }
@@ -24,7 +25,8 @@ public class User
     public User(String email, String password, String address, String mobile)
     {
         this.email = email;
-        this.password = password;
+
+        this.passwordHash = CalculateMD5Hash(password);
         this.address = address;
         this.mobile = mobile;
 
@@ -33,10 +35,14 @@ public class User
         offersReceived = new List<Car>();
     }
 
+    public User(string email, string password)
+    {
+        this.email = email;
+        this.passwordHash = CalculateMD5Hash(password);
+    }
+
     public void Register()
     {
-        string passwordHash = CalculateMD5Hash(password);
-
         var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         using (SqlConnection con = new SqlConnection(cnnString))
         {
@@ -73,5 +79,30 @@ public class User
             }
             return sb.ToString();
         }
+    }
+
+    public Boolean Login()
+    {
+        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(cnnString);
+
+        SqlCommand command = new SqlCommand("GetUser", connection);
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        connection.Open();
+        command.Parameters.AddWithValue("@email", email);
+        command.Parameters.AddWithValue("@password", passwordHash);
+        //TODO: ADD HASH
+        SqlDataReader reader = command.ExecuteReader();
+
+        if (reader.HasRows)
+        {
+            reader.Read();
+            email = reader.GetString(0);
+            passwordHash = reader.GetString(1);
+            address = reader.GetString(2);
+            mobile = reader.GetString(3);
+            return true;
+        }
+        return false;
     }
 }
