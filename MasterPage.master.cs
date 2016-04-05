@@ -20,11 +20,13 @@ public partial class MasterPage : System.Web.UI.MasterPage
             login.Visible = false;
             register.Visible = false;
             logout.Visible = true;
+            profile.Visible = true;
         }
         else
         {
             //user is not login 
             logout.Visible = false;
+            profile.Visible = false;
         }
     }
 }

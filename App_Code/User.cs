@@ -12,11 +12,11 @@ using System.Web;
 /// </summary>
 public class User
 {
+    public int id { get; set; }
     public string email { get; set; }
-
-    private string passwordHash { get; set; }
-    private string address { get; set; }
-    private string mobile { get; set; }
+    public string passwordHash { get; set; }
+    public string address { get; set; }
+    public string mobile { get; set; }
     private List<Car> wishList { get; set; }
     private List<Car> offersMade { get; set; }
     private List<Car> offersReceived { get; set; }
@@ -25,8 +25,20 @@ public class User
     public User(String email, String password, String address, String mobile)
     {
         this.email = email;
+        CalculateMD5Hash(password);
+        this.address = address;
+        this.mobile = mobile;
 
-        this.passwordHash = CalculateMD5Hash(password);
+        wishList = new List<Car>();
+        offersMade = new List<Car>();
+        offersReceived = new List<Car>();
+    }
+
+    public User(int id , String email, String password, String address, String mobile)
+    {
+        this.id = id;
+        this.email = email;
+        CalculateMD5Hash(password);
         this.address = address;
         this.mobile = mobile;
 
@@ -38,7 +50,7 @@ public class User
     public User(string email, string password)
     {
         this.email = email;
-        this.passwordHash = CalculateMD5Hash(password);
+        CalculateMD5Hash(password);
     }
 
     public void Register()
@@ -58,12 +70,39 @@ public class User
                     cmd.Connection = con;
                     con.Open();
                     cmd.ExecuteScalar();
+                    con.Close();
                 }
             }
         }
     }
 
-    private static string CalculateMD5Hash(string input)
+    public Boolean CheckUsernameUnique()
+    {
+
+        var constring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+        using (SqlConnection con = new SqlConnection(constring))
+        {
+            using (SqlCommand cmd = new SqlCommand("CheckEmailExist", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.Add("@count", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                int count = Convert.ToInt32(cmd.Parameters["@count"].Value);
+                con.Close();
+                if (count > 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void CalculateMD5Hash(string input)
     {
         // Use input string to calculate MD5 hash
         using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
@@ -77,7 +116,7 @@ public class User
             {
                 sb.Append(hashBytes[i].ToString("X2"));
             }
-            return sb.ToString();
+            passwordHash = sb.ToString();
         }
     }
 
@@ -97,14 +136,37 @@ public class User
         if (reader.HasRows)
         {
             reader.Read();
-            email = reader.GetString(0);
-            passwordHash = reader.GetString(1);
-            address = reader.GetString(2);
-            mobile = reader.GetString(3);
+            id = reader.GetInt32(0);
+            email = reader.GetString(1);
+            passwordHash = reader.GetString(2);
+            address = reader.GetString(3);
+            mobile = reader.GetString(4);
             return true;
         }
         return false;
     }
 
-   
+    public void Update()
+    {
+        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(cnnString))
+        {
+            using (SqlCommand cmd = new SqlCommand("UpdateUser"))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@password", passwordHash);
+                    cmd.Parameters.AddWithValue("@address", address);
+                    cmd.Parameters.AddWithValue("@mobile", mobile);
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteScalar();
+                    con.Close();
+                }
+            }
+        }
+    }
 }

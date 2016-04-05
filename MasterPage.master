@@ -20,9 +20,10 @@
                 <nav>
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation" class="active"><a href="Default.aspx">Home</a></li>
-                        <li id="login" runat="server" role="presentation"><a href="login.aspx">Login</a></li>                        
+                        <li id="login" runat="server" role="presentation"><a href="login.aspx">Login</a></li>               
+                        <li id="profile" runat="server" role="presentation"><a href="profile.aspx">Profile</a></li>         
                         <li id="register" runat="server" role="presentation"><a href="register.aspx">Register</a></li>      
-                        <li id="logout" runat="server" role="presentation"><a href="logout.aspx">Logout</a></li>                  
+                        <li id="logout" runat="server" role="presentation"><a href="logout.aspx">Logout</a></li>                                          
                     </ul>
                 </nav>
                 <h3 class="text-muted">Car Sale</h3>
