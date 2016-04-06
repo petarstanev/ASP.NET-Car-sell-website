@@ -7,6 +7,5 @@
         <h2>You have successfully registered.</h2>
         You can now <a class="btn btn-primary" href="login.aspx">Login</a>
     </div>
-
 </asp:Content>
 

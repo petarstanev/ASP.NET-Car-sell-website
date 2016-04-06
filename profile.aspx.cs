@@ -28,7 +28,7 @@ public partial class profile : System.Web.UI.Page
     }
     protected void ButtonUpdate_Click(object sender, EventArgs e)
     {
-        if (TextBoxPassword.Text == String.Empty)
+        if (TextBoxPassword.Text != String.Empty)
         {
             user.CalculateMD5Hash(TextBoxPassword.Text);
         }
