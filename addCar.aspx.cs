@@ -16,19 +16,20 @@ public partial class addCar : System.Web.UI.Page
     {
         User user = (User)Session["user"];
         Car car = new Car(DropDownListTypes.SelectedValue, TextBoxMake.Text, TextBoxModel.Text, TextBoxColour.Text, Int32.Parse(TextBoxPrice.Text), Int32.Parse(TextBoxYear.Text), TextBoxLocation.Text, user.id);
-        
-        
-        HttpFileCollection uploadedFiles = Request.Files;
 
-        foreach (HttpPostedFile file in uploadedFiles)
+        if (FileUploadImage.HasFile == true)
+        {
+            foreach (var file in FileUploadImage.PostedFiles)
             {
-           
-                string fileName = Path.GetFileName(file.FileName);
-                string url = Server.MapPath("~/images/") + fileName;
-                FileUploadImage.PostedFile.SaveAs(url);
+                string filename = Path.GetFileName(file.FileName);
+                string url = "/images/" + filename;
+                file.SaveAs(Server.MapPath(url));
+
+                //  FileUploadImage.PostedFile.SaveAs(url);
                 Image image = new Image(url);
                 car.addImage(image);
             }
+        }
         car.Upload();
     }
 }

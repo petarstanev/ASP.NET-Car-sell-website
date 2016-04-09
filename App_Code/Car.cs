@@ -8,6 +8,7 @@ using System.Text;
 
 public class Car
 {
+    public int id { get; set; }
     public string type { get; set; }
     public string make { get; set; }
     public string model { get; set; }
@@ -28,8 +29,8 @@ public class Car
         this.price = price;
         this.year = year;
         this.location = location;
-
         this.user_id = user_id;
+        images = new List<Image>();
     }
 
     public void Upload() {
@@ -48,16 +49,18 @@ public class Car
                     cmd.Parameters.AddWithValue("@price", price);
                     cmd.Parameters.AddWithValue("@year", year);
                     cmd.Parameters.AddWithValue("@location", location);
-                    cmd.Parameters.AddWithValue("@user_id", user_id);   
+                    cmd.Parameters.AddWithValue("@user_id", user_id);
+                    cmd.Parameters.Add("@car_id", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Connection = con;
                     con.Open();
-                    cmd.ExecuteScalar();
-                    con.Close();
+                    cmd.ExecuteNonQuery();
+                    id = Convert.ToInt32(cmd.Parameters["@car_id"].Value);
+                    con.Close();                   
                 }
             }
         }
            foreach(Image image in images){
-              // image.Upload(car_id);
+               image.Upload(id);
            }
         
     }
