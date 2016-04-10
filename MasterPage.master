@@ -20,7 +20,7 @@
                 <nav>
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation" class="active"><a href="Default.aspx">Home</a></li>
-                        <li id="cars" runat="server" role="presentation"><a href="cars.aspx">Cars</a></li>
+                        <li id="cars" runat="server" role="presentation"><a href="Cars.aspx">Cars</a></li>
                         <li id="addCar" runat="server" role="presentation"><a href="addCar.aspx">Add car</a></li>
                         <li id="login" runat="server" role="presentation"><a href="login.aspx">Login</a></li>
                         <li id="profile" runat="server" role="presentation"><a href="profile.aspx">Profile</a></li>
