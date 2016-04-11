@@ -33,7 +33,8 @@ public class Car
         images = new List<Image>();
     }
 
-    public void Upload() {
+    public void Upload()
+    {
         var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         using (SqlConnection con = new SqlConnection(cnnString))
         {
@@ -55,14 +56,45 @@ public class Car
                     con.Open();
                     cmd.ExecuteNonQuery();
                     id = Convert.ToInt32(cmd.Parameters["@car_id"].Value);
-                    con.Close();                   
+                    con.Close();
                 }
             }
         }
-           foreach(Image image in images){
-               image.Upload(id);
-           }
-        
+        foreach (Image image in images)
+        {
+            image.Upload(id);
+        }
+    }
+
+    public Car(int car_id)
+    {
+        images = new List<Image>();
+        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(cnnString);
+
+        SqlCommand command = new SqlCommand("GetCar", connection);
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        connection.Open();
+        command.Parameters.AddWithValue("@id", car_id);
+        SqlDataReader reader = command.ExecuteReader();
+
+        if (reader.HasRows)
+        {
+            reader.Read();
+            id = car_id;
+            type = reader.GetString(0);
+            make = reader.GetString(1);
+            model = reader.GetString(2);
+            colour = reader.GetString(3);
+            price = reader.GetInt32(4);
+            year = reader.GetInt32(5);
+            location = reader.GetString(6);
+            do
+            {
+                Image image = new Image(reader.GetString(7));
+                images.Add(image);
+            } while (reader.Read());
+        }
     }
 
     public void addImage(Image image)
