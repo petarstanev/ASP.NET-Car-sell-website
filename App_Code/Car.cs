@@ -8,6 +8,13 @@ using System.Text;
 
 public class Car
 {
+    private string p1;
+    private string p2;
+    private string p3;
+    private string p4;
+    private string p5;
+    private string p6;
+
     public int id { get; set; }
     public string type { get; set; }
     public string make { get; set; }
@@ -30,6 +37,18 @@ public class Car
         this.year = year;
         this.location = location;
         this.user_id = user_id;
+        images = new List<Image>();
+    }
+
+    public Car(string type, string make, string model, string colour, int price, int year, string location)
+    {
+        this.type = type;
+        this.make = make;
+        this.model = model;
+        this.colour = colour;
+        this.price = price;
+        this.year = year;
+        this.location = location;
         images = new List<Image>();
     }
 
@@ -95,6 +114,33 @@ public class Car
                 images.Add(image);
             } while (reader.Read());
         }
+    }
+
+    public static List<Car> getAllCars()
+    {
+        List<Car> cars = new List<Car>();
+
+        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        SqlConnection connection = new SqlConnection(cnnString);
+
+        SqlCommand command = new SqlCommand("GetAllCars", connection);
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        connection.Open();
+        SqlDataReader reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+           
+            Car car = new Car(reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetString(8));
+            if (!reader.IsDBNull(1))
+            {
+                Image img = new Image(reader.GetString(1));
+                car.addImage(img);
+            }
+            cars.Add(car);
+        }
+
+        return cars;
     }
 
     public void addImage(Image image)
