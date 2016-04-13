@@ -8,8 +8,6 @@
             <asp:BoundField DataField="type" HeaderText="type" SortExpression="type" />
             <asp:ImageField DataImageUrlField="image_url" HeaderText="Image" ItemStyle-Height="120" ItemStyle-Width="160" NullImageUrl="images/no-image.gif">
                 <ControlStyle CssClass="img-thumbnail" />
-
-                <ItemStyle Height="120px" Width="160px"></ItemStyle>
             </asp:ImageField>
             <asp:BoundField DataField="make" HeaderText="make" SortExpression="make" />
             <asp:BoundField DataField="model" HeaderText="model" SortExpression="model" />

@@ -25,8 +25,7 @@ public partial class addCar : System.Web.UI.Page
                 string url = "/images/" + filename;
                 file.SaveAs(Server.MapPath(url));
 
-                //  FileUploadImage.PostedFile.SaveAs(url);
-                Image image = new Image(url);
+                Image image = new Image(url,false);
                 car.addImage(image);
             }
         }

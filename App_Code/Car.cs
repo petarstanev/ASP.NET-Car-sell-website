@@ -110,7 +110,7 @@ public class Car
             location = reader.GetString(6);
             do
             {
-                Image image = new Image(reader.GetString(7));
+                Image image = new Image(reader.GetString(7),false);
                 images.Add(image);
             } while (reader.Read());
         }
@@ -134,7 +134,7 @@ public class Car
             Car car = new Car(reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetString(8));
             if (!reader.IsDBNull(1))
             {
-                Image img = new Image(reader.GetString(1));
+                Image img = new Image(reader.GetString(1),true);
                 car.addImage(img);
             }
             cars.Add(car);
@@ -146,5 +146,14 @@ public class Car
     public void addImage(Image image)
     {
         images.Add(image);
+    }
+
+    public string getMainImageUrl() {
+        foreach (Image image in images) {
+            if (image.main) {
+                return image.url;
+            }
+        }
+        return "";
     }
 }
