@@ -12,11 +12,10 @@ using System.Web;
 public class Image 
 {
     public string url { get; set; }
-    public bool main { get; set; }
-    public Image(string url,bool main)
+
+    public Image(string url)
     {
         this.url = url;
-        this.main = main;
     }
 
     public void Upload(int car_id)

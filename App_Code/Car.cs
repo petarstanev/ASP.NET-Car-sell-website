@@ -8,24 +8,32 @@ using System.Text;
 
 public class Car
 {
-    private string p1;
-    private string p2;
-    private string p3;
-    private string p4;
-    private string p5;
-    private string p6;
-
     public int id { get; set; }
     public string type { get; set; }
     public string make { get; set; }
     public string model { get; set; }
     public string colour { get; set; }
     public List<Image> images { get; set; }
+    public string mainImageUrl { get; set; }
     public int price { get; set; }
     public int year { get; set; }
     public string location { get; set; }
     public int user_id { get; set; }
 
+
+    public Car(int id, string type, string make, string model, string colour, int price, int year, string location, int user_id)
+    {
+        this.id = id;
+        this.type = type;
+        this.make = make;
+        this.model = model;
+        this.colour = colour;
+        this.price = price;
+        this.year = year;
+        this.location = location;
+        this.user_id = user_id;
+        images = new List<Image>();
+    }
 
     public Car(string type, string make, string model, string colour, int price, int year, string location, int user_id)
     {
@@ -110,50 +118,27 @@ public class Car
             location = reader.GetString(6);
             do
             {
-                Image image = new Image(reader.GetString(7),false);
-                images.Add(image);
+                if (!reader.IsDBNull(7))
+                {
+                    Image image = new Image(reader.GetString(7));
+                    images.Add(image);
+                }
             } while (reader.Read());
+            GetMainImageUrl();
         }
     }
 
-    public static List<Car> getAllCars()
-    {
-        List<Car> cars = new List<Car>();
-
-        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(cnnString);
-
-        SqlCommand command = new SqlCommand("GetAllCars", connection);
-        command.CommandType = System.Data.CommandType.StoredProcedure;
-        connection.Open();
-        SqlDataReader reader = command.ExecuteReader();
-
-        while (reader.Read())
-        {
-           
-            Car car = new Car(reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetString(8));
-            if (!reader.IsDBNull(1))
-            {
-                Image img = new Image(reader.GetString(1),true);
-                car.addImage(img);
-            }
-            cars.Add(car);
-        }
-
-        return cars;
-    }
-
-    public void addImage(Image image)
+    public void AddImage(Image image)
     {
         images.Add(image);
     }
 
-    public string getMainImageUrl() {
-        foreach (Image image in images) {
-            if (image.main) {
-                return image.url;
-            }
+
+    public void GetMainImageUrl()
+    {
+        if (images.Count > 0)
+        {
+            mainImageUrl = images[0].url;
         }
-        return "";
     }
 }

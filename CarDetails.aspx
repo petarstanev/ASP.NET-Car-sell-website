@@ -24,7 +24,9 @@
                 <br />
                 <asp:Button ID="ButtonMakeOffer" runat="server" CssClass="btn btn-success" Text="Make offer" />
                 <br />
-                <asp:Button ID="ButtonAddtoWishlist" runat="server" CssClass="btn btn-info" Text="Add to Wish list" />
+                <asp:TextBox ID="TextBoxWishListComment" placeholder="Comment for wishlist."  runat="server"></asp:TextBox>
+                <br/>
+                <asp:Button ID="ButtonAddtoWishlist" runat="server" CssClass="btn btn-info" Text="Add to Wish list" OnClick="ButtonAddtoWishlist_Click" />
             </div>
         </div>
     </div>

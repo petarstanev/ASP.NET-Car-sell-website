@@ -26,13 +26,16 @@
     <asp:GridView ID="GridViewCars" runat="server" AutoGenerateColumns="false">
         <Columns>
             <asp:BoundField HeaderText="Type" DataField="Type"></asp:BoundField>
-            <asp:ImageField HeaderText="Image" ControlStyle-CssClass="img-responsive" DataImageUrlField="Image" ItemStyle-Height="120" ItemStyle-Width="160" NullImageUrl="images/no-image.gif"></asp:ImageField>
+            <asp:ImageField DataImageUrlField="Image" HeaderText="Image" ItemStyle-Height="120" ItemStyle-Width="160" NullImageUrl="images/no-image.gif">
+                <ControlStyle CssClass="img-thumbnail" />
+            </asp:ImageField>
             <asp:BoundField HeaderText="Make" DataField="Make"></asp:BoundField>
             <asp:BoundField HeaderText="Model" DataField="Model"></asp:BoundField>
             <asp:BoundField HeaderText="Colour" DataField="Colour"></asp:BoundField>
             <asp:BoundField HeaderText="Price" DataField="Price"></asp:BoundField>
             <asp:BoundField HeaderText="Year" DataField="Year"></asp:BoundField>
             <asp:BoundField HeaderText="Location" DataField="Location"></asp:BoundField>
+             <asp:HyperLinkField DataNavigateUrlFields="Link" HeaderText="Linkr" DataNavigateUrlFormatString="CarDetails.aspx?Id={0}" DataTextField="Link" />
         </Columns>
     </asp:GridView>
 </asp:Content>

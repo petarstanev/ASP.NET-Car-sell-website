@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="addCar.aspx.cs" Inherits="addCar" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AddCar.aspx.cs" Inherits="addCar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -22,7 +22,7 @@
     <asp:TextBox ID="TextBoxColour" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="RequiredFieldValidatorColour" runat="server" ErrorMessage="Please enter colour!" ControlToValidate="TextBoxColour"></asp:RequiredFieldValidator>
     <br />
-    Picture: <asp:FileUpload ID="FileUploadImage" AllowMultiple="true" runat="server" />
+    Picture: <asp:FileUpload ID="FileUploadImage" Text="Upload" AllowMultiple="true" runat="server" />
     <br />
     Price:<asp:TextBox ID="TextBoxPrice" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="RequiredFieldValidatorPrice" runat="server" ErrorMessage="Please enter price!" ControlToValidate="TextBoxPrice"></asp:RequiredFieldValidator>

@@ -10,7 +10,11 @@ public partial class addCar : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["user"] == null)
+        {
+            //redirect to login.aspx if user is not login.
+            Response.Redirect("Login.aspx");
+        }
     }
     protected void ButtonAddCar_Click(object sender, EventArgs e)
     {
@@ -25,10 +29,11 @@ public partial class addCar : System.Web.UI.Page
                 string url = "/images/" + filename;
                 file.SaveAs(Server.MapPath(url));
 
-                Image image = new Image(url,false);
-                car.addImage(image);
+                Image image = new Image(url);
+                car.AddImage(image);
             }
         }
         car.Upload();
+        Response.Redirect("~/CarDetails.aspx?Id=" + car.id);
     }
 }

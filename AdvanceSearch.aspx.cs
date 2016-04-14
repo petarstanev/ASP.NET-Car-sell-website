@@ -17,7 +17,7 @@ public partial class AdvanceSearch : System.Web.UI.Page
     }
     protected void ButtonSearch_Click(object sender, EventArgs e)
     {
-        List<Car> cars = Car.getAllCars();
+        List<Car> cars = new CarCollection();
         List<Car> outputCars = new List<Car>();
 
         Car car;
@@ -130,20 +130,20 @@ public partial class AdvanceSearch : System.Web.UI.Page
         dt.Columns.Add("Price", System.Type.GetType("System.Int32"));
         dt.Columns.Add("Year", System.Type.GetType("System.Int32"));
         dt.Columns.Add("Location", System.Type.GetType("System.String"));
-
+        dt.Columns.Add("Link", System.Type.GetType("System.String"));
         foreach (Car carOutput in cars)
         {
 
             dr = dt.NewRow();
             dr["Type"] = carOutput.type;
-            dr["Image"] = carOutput.getMainImageUrl();
+            dr["Image"] = carOutput.mainImageUrl;
             dr["Make"] = carOutput.make;
             dr["Model"] = carOutput.model;
             dr["Colour"] = carOutput.colour;
             dr["Price"] = carOutput.price;
             dr["Year"] = carOutput.year;
             dr["Location"] = carOutput.location;
-
+            dr["Link"] = carOutput.id;
             dt.Rows.Add(dr);
         }
         GridViewCars.DataSource = dt;
