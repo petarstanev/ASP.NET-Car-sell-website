@@ -49,4 +49,112 @@ public class CarCollection : List<Car>
         }
         return true;
     }
+
+    public List<Car> GetAll(string type, string make, string model, string colour, string startingPriceText, string endPriceText, string startingYearText, string endingYearText,string location)
+    {
+        Car car;
+        for (int i = 0; i < Count; i++)
+        {
+            car = this[i];
+
+            if (type != "")
+            {
+                if (!car.type.Contains(type))
+                {
+                    RemoveAt(i);
+                    i--;
+                    continue;
+                }
+            }
+
+            if (make != "")
+            {
+                if (!car.make.Contains(make))
+                {
+                    RemoveAt(i);
+                    i--;
+                    continue;
+                }
+            }
+
+            if (model != "")
+            {
+                if (!car.model.Contains(model))
+                {
+                    RemoveAt(i);
+                    i--;
+                    continue;
+                }
+            }
+
+            if (colour != "")
+            {
+                if (!car.colour.Contains(colour))
+                {
+                    RemoveAt(i);
+                    i--;
+                    continue;
+                }
+            }
+
+            if (startingPriceText != "" || endPriceText != "")
+            {
+                int startingPrice = 0, maximumPrice = Int32.MaxValue;
+                if (startingPriceText != "")
+                {
+                    startingPrice = Int32.Parse(startingPriceText);
+                }
+                if (endPriceText != "")
+                {
+                    maximumPrice = Int32.Parse(endPriceText);
+                }
+
+
+                if (!(maximumPrice > car.price && car.price > startingPrice))
+                {
+                    RemoveAt(i);
+                    i--;
+                    continue;
+                }
+            }
+
+            if (startingYearText != "" || endingYearText != "")
+            {
+                int startingYear = 0, endingYear = Int32.MaxValue;
+                if (startingYearText != "")
+                {
+                    startingYear = Int32.Parse(startingYearText);
+                }
+                if (endingYearText != "")
+                {
+                    endingYear = Int32.Parse(endingYearText);
+                }
+
+
+                if (!(endingYear > car.year && car.year > startingYear))
+                {
+                    RemoveAt(i);
+                    i--;
+                    continue;
+                }
+            }
+
+            if (location != "")
+            {
+                if (!car.location.Contains(location))
+                {
+                    RemoveAt(i);
+                    i--;
+                    continue;
+                }
+            }
+        }
+
+        return this;
+    }
+
+    public int GetAllCount( )
+    {
+        return Count;
+    }
 }
