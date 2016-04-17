@@ -23,10 +23,13 @@
     Location:<asp:TextBox ID="TextBoxLocation" runat="server"></asp:TextBox>
     <br />
     <asp:Button ID="ButtonSearch" runat="server" Text="Search" OnClick="ButtonSearch_Click" />
-    <asp:GridView ID="GridViewCars" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1" AllowPaging="True">
+    <asp:GridView ID="GridViewCars" runat="server" CssClass="table table-responsive table-hover table-striped" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1" AllowSorting="True" AllowPaging="True">
         <Columns>
             <asp:BoundField HeaderText="type" DataField="type" SortExpression="type"></asp:BoundField>
-            <asp:ImageField DataImageUrlField="mainImageUrl" HeaderText="image" NullImageUrl="~/images/no-image.gif">
+            <asp:ImageField DataImageUrlField="mainImageUrl" ItemStyle-Height="120" ItemStyle-Width="160" HeaderText="image" NullImageUrl="~/images/no-image.gif" ControlStyle-CssClass="img-thumbnail">
+                <ControlStyle CssClass="img-thumbnail"></ControlStyle>
+
+                <ItemStyle Height="120px" Width="160px"></ItemStyle>
             </asp:ImageField>
             <asp:BoundField HeaderText="make" DataField="make" SortExpression="make"></asp:BoundField>
             <asp:BoundField HeaderText="model" DataField="model" SortExpression="model"></asp:BoundField>
@@ -34,10 +37,12 @@
             <asp:BoundField DataField="price" HeaderText="price" SortExpression="price" />
             <asp:BoundField DataField="year" HeaderText="year" SortExpression="year" />
             <asp:BoundField DataField="location" HeaderText="location" SortExpression="location" />
-           
+            <asp:HyperLinkField AccessibleHeaderText="Link" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="~/CarDetails.aspx?id={0}" HeaderText="Link" Text="link" />
+
         </Columns>
     </asp:GridView>
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAll" TypeName="CarCollection">
+    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAll" SortParameterName="sortExpression"
+ TypeName="CarCollection">
         <SelectParameters>
             <asp:ControlParameter ControlID="TextBoxType" ConvertEmptyStringToNull="False" Name="type" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="TextBoxMake" ConvertEmptyStringToNull="False" Name="make" PropertyName="Text" Type="String" />

@@ -10,7 +10,6 @@ using System.Web.UI.WebControls;
 
 public partial class AdvanceSearch : System.Web.UI.Page
 {
-    DataTable dt;
     protected void Page_Load(object sender, EventArgs e)
     {
 

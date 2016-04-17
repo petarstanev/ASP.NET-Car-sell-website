@@ -15,22 +15,34 @@
 </head>
 <body>
     <form runat="server">
-        <div class="container col-md-8 col-md-offset-2">
-            <div class="header clearfix">
-                <nav>
-                    <ul class="nav nav-pills pull-right">
-                        <li role="presentation" class="active"><a href="Default.aspx">Home</a></li>
-                        <li id="cars" runat="server" role="presentation"><a href="Cars.aspx">Cars</a></li>
-                         <li id="advanceSearch" runat="server" role="presentation"><a href="AdvanceSearch.aspx">Advance Search</a></li>
-                        <li id="addCar" runat="server" role="presentation"><a href="addCar.aspx">Add car</a></li>
-                        <li id="login" runat="server" role="presentation"><a href="login.aspx">Login</a></li>
-                        <li id="profile" runat="server" role="presentation"><a href="profile.aspx">Profile</a></li>
-                        <li id="register" runat="server" role="presentation"><a href="register.aspx">Register</a></li>
-                        <li id="logout" runat="server" role="presentation"><a href="logout.aspx">Logout</a></li>
-                    </ul>
-                </nav>
-                <h3 class="text-muted">Car Sale</h3>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="Default.aspx">Car sale</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="AdvanceSearch.aspx">Cars</a></li>
+                    <li id="addCar" runat="server" role="presentation"><a href="addCar.aspx">Add car</a></li>
+
+                    <li id="profile" runat="server" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile
+        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">My cars</a></li>
+                            <li><a href="WishList.aspx">Wish list</a></li>
+                            <li><a href="ProfileSettings.aspx">Settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="login" runat="server" role="presentation"><a href="login.aspx">Login</a></li>
+                    <li id="register" runat="server" role="presentation"><a href="register.aspx">Register</a></li>
+                    <li id="logout" runat="server" role="presentation"><a href="logout.aspx">Logout</a></li>
+                </ul>
             </div>
+        </nav>
+
+        <div class="container col-md-8 col-md-offset-2">
 
             <div class="jumbotron">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

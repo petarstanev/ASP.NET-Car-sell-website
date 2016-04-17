@@ -35,17 +35,17 @@ public partial class CarDetails : System.Web.UI.Page
     {
         if (Request.QueryString["Id"] != null)
         {
-            List<WishCar> wishList;
+            List<Car> wishList;
             if (Session["WishList"] != null)
             {
-                wishList = Session["WishList"] as List<WishCar>;
+                wishList = Session["WishList"] as List<Car>;
             }
             else
             {
-                wishList = new List<WishCar>();
+                wishList = new List<Car>();
             }
             
-            wishList.Add(new WishCar(car.id, TextBoxWishListComment.Text));
+            wishList.Add(car);
 
 
             Session["WishList"] = wishList;

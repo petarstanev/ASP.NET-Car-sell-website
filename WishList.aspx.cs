@@ -11,9 +11,7 @@ public partial class WishList : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
-            List<WishCar> wishCars = Session["WishList"] as List<WishCar>;
-            RepeatWishList.DataSource = wishCars;
-            RepeatWishList.DataBind();
+        
         }
     }
 }

@@ -10,10 +10,8 @@ using System.Web;
 /// </summary>
 public class CarCollection : List<Car>
 {
-    
     public CarCollection()
     {
-    
         var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(cnnString);
 
@@ -26,7 +24,7 @@ public class CarCollection : List<Car>
         {
 
             Car car = new Car(reader.GetInt32(0), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetString(8), reader.GetInt32(9));
-            if (UniqueCarID(car))
+            if (UniqueCarId(car))
             {
                 if (!reader.IsDBNull(1))
                 {
@@ -37,20 +35,23 @@ public class CarCollection : List<Car>
                 Add(car);
             }
         }
-
     }
 
-    private bool UniqueCarID(Car car)
+
+
+    public List<Car> GetWishList()
     {
-        foreach (Car carCheck in this)
-        {
-            if (car.id == carCheck.id)
-                return false;
-        }
-        return true;
+        List<Car> wishList= HttpContext.Current.Session["WishList"] as List<Car>;
+
+        return wishList;
     }
 
-    public List<Car> GetAll(string type, string make, string model, string colour, string startingPriceText, string endPriceText, string startingYearText, string endingYearText,string location)
+    private bool UniqueCarId(Car car)
+    {
+        return this.All(carCheck => car.id != carCheck.id);
+    }
+
+    public List<Car> GetAll(string type, string make, string model, string colour, string startingPriceText, string endPriceText, string startingYearText, string endingYearText, string location, string sortExpression)
     {
         Car car;
         for (int i = 0; i < Count; i++)
@@ -149,11 +150,54 @@ public class CarCollection : List<Car>
                 }
             }
         }
+        if (sortExpression != "")
+            return sort(sortExpression);
 
         return this;
     }
 
-    public int GetAllCount( )
+    private List<Car> sort(string sortExpression)
+    {
+        List<Car> sortedCars = new List<Car>();
+        string sortBy = sortExpression;
+        bool isDescending = false;
+        var orderedCars = this;
+
+        if (sortExpression.ToLowerInvariant().EndsWith(" desc"))
+        {
+            sortBy = sortExpression.Substring(0, sortExpression.Length - 5);
+            isDescending = true;
+        }
+
+        switch (sortBy)
+        {
+            case "type":
+                sortedCars = isDescending ? this.OrderByDescending(o => o.type).ToList() : this.OrderBy(o => o.type).ToList();
+                break;
+            case "make":
+                sortedCars = isDescending ? this.OrderByDescending(o => o.make).ToList() : this.OrderBy(o => o.make).ToList();
+                break;
+            case "model":
+                sortedCars = isDescending ? this.OrderByDescending(o => o.model).ToList() : this.OrderBy(o => o.model).ToList();
+                break;
+            case "colour":
+                sortedCars = isDescending ? this.OrderByDescending(o => o.colour).ToList() : this.OrderBy(o => o.colour).ToList();
+                break;
+            case "price":
+                sortedCars = isDescending ? this.OrderByDescending(o => o.price).ToList() : this.OrderBy(o => o.price).ToList();
+                break;
+            case "year":
+                sortedCars = isDescending ? this.OrderByDescending(o => o.year).ToList() : this.OrderBy(o => o.year).ToList();
+                break;
+            case "location":
+                sortedCars = isDescending ? this.OrderByDescending(o => o.location).ToList() : this.OrderBy(o => o.location).ToList();
+                break;
+        }
+
+        return sortedCars;
+    }
+
+    public int GetAllCount()
     {
         return Count;
     }

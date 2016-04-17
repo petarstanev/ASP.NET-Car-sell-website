@@ -17,6 +17,7 @@ public partial class login_form : System.Web.UI.Page
     protected void ButtonLogout_Click(object sender, EventArgs e)
     {
         Session["user"] = null;
+        Session["WishList"] = null;
         Response.Redirect("Default.aspx");
     }
 }
