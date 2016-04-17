@@ -60,6 +60,10 @@ public class Car
         images = new List<Image>();
     }
 
+    public Car()
+    {
+    }
+
     public void Upload()
     {
         var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;

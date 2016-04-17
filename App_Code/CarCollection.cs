@@ -37,16 +37,32 @@ public class CarCollection : List<Car>
         }
     }
 
+    public CarCollection(bool empty)
+    {
+    }
 
 
     public List<Car> GetWishList()
     {
         List<Car> wishList= HttpContext.Current.Session["WishList"] as List<Car>;
-
-        return wishList;
+        Clear();
+        foreach (Car car in wishList)
+        {
+            Add(car);
+        }
+        return this;
     }
 
-    private bool UniqueCarId(Car car)
+    public void RemoveCar(Car car)
+    {
+        for (int i = 0; i < Count; i++)
+        {
+            if(this[i].id == car.id)
+                RemoveAt(i);
+        }
+    }
+
+    public bool UniqueCarId(Car car)
     {
         return this.All(carCheck => car.id != carCheck.id);
     }

@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 public partial class CarDetails : System.Web.UI.Page
 {
     Car car;
+    CarCollection wishList;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.QueryString["Id"] != null)
@@ -29,27 +30,52 @@ public partial class CarDetails : System.Web.UI.Page
                 images.Controls.Add(pageImaage);
             }
 
+            if (Session["WishList"] == null)
+            {
+                wishList = new CarCollection(
+                    true);
+            }
+            else
+            {
+                wishList = Session["WishList"] as CarCollection;
+
+                foreach (Car carCheck in wishList)
+                {
+                    if (carCheck.id == car.id)
+                    {
+                        ButtonAddtoWishlist.Visible = false;
+                        ButtonRemoveFromWishList.Visible = true;
+                    }
+                }
+
+            }
+        }
+        else
+        {
+            Response.Redirect("~/AdvanceSearch.aspx");
         }
     }
     protected void ButtonAddtoWishlist_Click(object sender, EventArgs e)
     {
-        if (Request.QueryString["Id"] != null)
+        if (Session["User"] != null)
         {
-            List<Car> wishList;
-            if (Session["WishList"] != null)
-            {
-                wishList = Session["WishList"] as List<Car>;
-            }
-            else
-            {
-                wishList = new List<Car>();
-            }
-            
+
             wishList.Add(car);
-
-
             Session["WishList"] = wishList;
+            ButtonAddtoWishlist.Visible = false;
+            ButtonRemoveFromWishList.Visible = true;
         }
-        //Response.Redirect("PageB.aspx");
+        else
+        {
+            LabelLoginWarning.Visible = true;
+        }
     }
+    protected void ButtonRemoveFromWishList_Click(object sender, EventArgs e)
+    {
+        wishList.RemoveCar(car);
+        Session["WishList"] = wishList;
+        ButtonAddtoWishlist.Visible = true;
+        ButtonRemoveFromWishList.Visible = false;
+    }
+
 }
