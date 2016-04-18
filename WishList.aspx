@@ -10,8 +10,6 @@
             <asp:BoundField HeaderText="type" DataField="type" SortExpression="type"></asp:BoundField>
             <asp:ImageField DataImageUrlField="mainImageUrl" ItemStyle-Height="120" ItemStyle-Width="160" HeaderText="image" NullImageUrl="~/images/no-image.gif" ControlStyle-CssClass="img-thumbnail">
                 <ControlStyle CssClass="img-thumbnail"></ControlStyle>
-
-                <ItemStyle Height="120px" Width="160px"></ItemStyle>
             </asp:ImageField>
             <asp:BoundField HeaderText="make" DataField="make" SortExpression="make"></asp:BoundField>
             <asp:BoundField HeaderText="model" DataField="model" SortExpression="model"></asp:BoundField>
@@ -20,7 +18,7 @@
             <asp:BoundField DataField="year" HeaderText="year" SortExpression="year" />
             <asp:BoundField DataField="location" HeaderText="location" SortExpression="location" />
             <asp:HyperLinkField AccessibleHeaderText="Link" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="~/CarDetails.aspx?id={0}" HeaderText="Link" Text="link" />
-            <asp:CommandField ShowDeleteButton="True" />
+            <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
         </Columns>
     </asp:GridView>
 

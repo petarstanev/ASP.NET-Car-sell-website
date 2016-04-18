@@ -55,11 +55,13 @@ public class CarCollection : List<Car>
 
     public void RemoveCar(Car car)
     {
+        GetWishList();
         for (int i = 0; i < Count; i++)
         {
             if(this[i].id == car.id)
                 RemoveAt(i);
         }
+        HttpContext.Current.Session["WishList"] = this;
     }
 
     public bool UniqueCarId(Car car)
