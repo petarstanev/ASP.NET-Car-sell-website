@@ -18,9 +18,9 @@
                 <br />
                 Year:<asp:Label ID="LabelYear" runat="server" />
                 <br />
-                Location:<asp:Label ID="LabelLocation" runat="server" />
-                <br />
                 Price:<asp:Label ID="LabelPrice" runat="server" />
+                <br />
+                Location:<asp:Label ID="LabelLocation" runat="server" />
                 <br />
                 <asp:Button ID="ButtonMakeOffer" runat="server" CssClass="btn btn-success" Text="Make offer" />
                 <br />

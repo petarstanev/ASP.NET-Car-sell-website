@@ -28,7 +28,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile
         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">My cars</a></li>
+                            <li><a href="MyCars.aspx">My cars</a></li>
                             <li><a href="WishList.aspx">Wish list</a></li>
                             <li><a href="ProfileSettings.aspx">Settings</a></li>
                         </ul>
@@ -42,12 +42,11 @@
             </div>
         </nav>
 
-        <div class="container col-md-8 col-md-offset-2">
-
-            <div class="jumbotron">
+        <div class="container">
+            
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
-            </div>
+            
             <div class="footer">
                 <p class="text-muted small text-center">
                     Petar Stanev 2016. <a href="http://www.salford.ac.uk/">University of Salford.</a>

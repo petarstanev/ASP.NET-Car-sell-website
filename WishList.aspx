@@ -17,16 +17,15 @@
             <asp:BoundField DataField="price" HeaderText="price" SortExpression="price" />
             <asp:BoundField DataField="year" HeaderText="year" SortExpression="year" />
             <asp:BoundField DataField="location" HeaderText="location" SortExpression="location" />
+            <asp:BoundField DataField="notes" HeaderText="notes" SortExpression="notes" />
             <asp:HyperLinkField AccessibleHeaderText="Link" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="~/CarDetails.aspx?id={0}" HeaderText="Link" Text="link" />
-            <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
+             <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
         </Columns>
     </asp:GridView>
 
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetWishList" 
-        TypeName="CarCollection" DataObjectTypeName="Car"  DeleteMethod="RemoveCar">
-        <DeleteParameters>
-            <asp:ControlParameter ControlID="GridViewCars" Name="newparameter" PropertyName="ID" />
-        </DeleteParameters>
-    </asp:ObjectDataSource>
+   
+    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" DataObjectTypeName="Car" DeleteMethod="RemoveCar" SelectMethod="GetWishList"  TypeName="WishCarCollection" SortParameterName="sortExpression"></asp:ObjectDataSource>
+
+   
 </asp:Content>
 

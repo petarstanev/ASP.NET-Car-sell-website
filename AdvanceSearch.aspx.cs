@@ -12,7 +12,7 @@ public partial class AdvanceSearch : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        GridViewCars.HeaderRow.TableSection = TableRowSection.TableHeader;
     }
     protected void ButtonSearch_Click(object sender, EventArgs e)
     {

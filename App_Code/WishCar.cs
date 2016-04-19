@@ -16,6 +16,5 @@ public class WishCar : Car
         this.notes = notes;
 	}
 
- 
 
 }

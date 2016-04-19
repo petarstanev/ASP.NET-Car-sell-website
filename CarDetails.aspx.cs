@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 public partial class CarDetails : System.Web.UI.Page
 {
     Car car;
-    CarCollection wishList;
+    WishCarCollection wishList;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.QueryString["Id"] != null)
@@ -32,18 +32,18 @@ public partial class CarDetails : System.Web.UI.Page
 
             if (Session["WishList"] == null)
             {
-                wishList = new CarCollection(
-                    true);
+                wishList = new WishCarCollection();
             }
             else
             {
-                wishList = Session["WishList"] as CarCollection;
+                wishList = Session["WishList"] as WishCarCollection;
 
-                foreach (Car carCheck in wishList)
+                foreach (WishCar carCheck in wishList)
                 {
                     if (carCheck.id == car.id)
                     {
                         ButtonAddtoWishlist.Visible = false;
+                        TextBoxWishListComment.Visible = false;
                         ButtonRemoveFromWishList.Visible = true;
                     }
                 }
@@ -59,10 +59,11 @@ public partial class CarDetails : System.Web.UI.Page
     {
         if (Session["User"] != null)
         {
-
-            wishList.Add(car);
+            WishCar wishCar = new WishCar(car.id, TextBoxWishListComment.Text);
+            wishList.Add(wishCar);
             Session["WishList"] = wishList;
             ButtonAddtoWishlist.Visible = false;
+            TextBoxWishListComment.Visible = false;
             ButtonRemoveFromWishList.Visible = true;
         }
         else
@@ -75,6 +76,7 @@ public partial class CarDetails : System.Web.UI.Page
         wishList.RemoveCar(car);
         Session["WishList"] = wishList;
         ButtonAddtoWishlist.Visible = true;
+        TextBoxWishListComment.Visible = true;
         ButtonRemoveFromWishList.Visible = false;
     }
 

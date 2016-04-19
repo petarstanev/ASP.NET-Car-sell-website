@@ -137,6 +137,15 @@ public class Car
         images.Add(image);
     }
 
+    public List<Image> getImages(int id)
+    {
+        return new Car(id).images;
+    }
+
+    public void removeImage(int imageId)
+    {
+        images.RemoveAt(imageId);
+    }
 
     public void GetMainImageUrl()
     {

@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AdvanceSearch.aspx.cs" Inherits="AdvanceSearch" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="MyCars.aspx.cs" Inherits="MyCars" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="form-group">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+        <div class="form-group">
         <div class="col-md-4">
 
             <asp:TextBox ID="TextBoxType" CssClass="form-control" placeholder="Type" runat="server"></asp:TextBox>
@@ -26,9 +26,8 @@
             <asp:TextBox ID="TextBoxYearStarting" CssClass="form-control" placeholder="Starting Year" runat="server"></asp:TextBox>
             <asp:TextBox ID="TextBoxYearEnding" CssClass="form-control" placeholder="Ending year" runat="server"></asp:TextBox>
             <br />
-            <asp:Button ID="ButtonSearch" CssClass="btn btn-lg btn-primary col-md-offset-2" runat="server" Text="Search" OnClick="ButtonSearch_Click" />
+            <asp:Button ID="ButtonSearch" CssClass="btn btn-lg btn-primary col-md-offset-2" runat="server" Text="Search" />
         </div>
-
     </div>
     <asp:GridView ID="GridViewCars" runat="server" CssClass="table table-striped" UseAccessibleHeader="True"  AutoGenerateColumns="False" DataSourceID="ObjectDataSource1" AllowSorting="True" AllowPaging="True" GridLines="None">
         <Columns>
@@ -45,11 +44,11 @@
             <asp:BoundField DataField="year" HeaderText="year" SortExpression="year" />
             <asp:BoundField DataField="location" HeaderText="location" SortExpression="location" />
             <asp:HyperLinkField AccessibleHeaderText="Link" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="~/CarDetails.aspx?id={0}" HeaderText="Link" Text="link" />
-
+            <asp:HyperLinkField AccessibleHeaderText="Edit" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="~/CarEdit.aspx?id={0}" HeaderText="Edit" Text="Edit" />
         </Columns>
     </asp:GridView>
     <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAll" SortParameterName="sortExpression"
-        TypeName="AllCarCollection">
+        TypeName="UserCarCollection">
         <SelectParameters>
             <asp:ControlParameter ControlID="TextBoxType" ConvertEmptyStringToNull="False" Name="type" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="TextBoxMake" ConvertEmptyStringToNull="False" Name="make" PropertyName="Text" Type="String" />
