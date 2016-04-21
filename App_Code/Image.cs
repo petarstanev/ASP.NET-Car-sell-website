@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for Image
+/// Image is used in List collection of images for Car.
 /// </summary>
 public class Image 
 {
