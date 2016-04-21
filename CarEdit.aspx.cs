@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -7,20 +8,55 @@ using System.Web.UI.WebControls;
 
 public partial class CarEdit : System.Web.UI.Page
 {
+    Car car;
     protected void Page_Load(object sender, EventArgs e)
     {
-        Car car;
+
         if (Request.QueryString["Id"] != null)
         {
             int car_id = Int32.Parse(Request.QueryString["Id"]);
             car = new Car(car_id);
-            TextBoxMake.Text = car.make;
-            TextBoxModel.Text = car.model;
-            TextBoxType.Text = car.type;
-            TextBoxColour.Text = car.colour;
-            TextBoxYear.Text = car.year.ToString();
-            TextBoxLocation.Text = car.location;
-            TextBoxPrice.Text = car.price.ToString();
+            if (!Page.IsPostBack)
+            {
+                TextBoxMake.Text = car.make;
+                TextBoxModel.Text = car.model;
+                TextBoxType.Text = car.type;
+                TextBoxColour.Text = car.colour;
+                TextBoxYear.Text = car.year.ToString();
+                TextBoxLocation.Text = car.location;
+                TextBoxPrice.Text = car.price.ToString();
+            }
         }
     }
+
+    protected void ButtonAddImage_Click(object sender, EventArgs e)
+    {
+
+        if (FileUploadImage.HasFile)
+        {
+            var file = FileUploadImage.PostedFile;
+
+            string filename = Path.GetFileName(file.FileName);
+            string url = "/images/" + filename;
+            file.SaveAs(Server.MapPath(url));
+
+            Image image = new Image(url);
+            car.AddImage(image);
+            image.Upload(car.id);
+        }
+        Response.Redirect("~/CarEdit.aspx?Id=" + car.id);
+    }
+
+    protected void ButtonUpdate_Click(object sender, EventArgs e)
+    {
+        car.make = TextBoxMake.Text;
+        car.model = TextBoxModel.Text;
+        car.type = TextBoxType.Text;
+        car.colour = TextBoxColour.Text;
+        car.year = Int32.Parse(TextBoxYear.Text);
+        car.location = TextBoxLocation.Text;
+        car.price = Int32.Parse(TextBoxPrice.Text);
+        car.Update();
+    }
+
 }

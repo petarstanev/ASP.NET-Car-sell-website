@@ -154,4 +154,32 @@ public class Car
             mainImageUrl = images[0].url;
         }
     }
+
+    public void Update()
+    {
+        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(cnnString))
+        {
+            using (SqlCommand cmd = new SqlCommand("UpdateCar"))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@type", type);
+                    cmd.Parameters.AddWithValue("@make", make);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@colour", colour);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@year", year);
+                    cmd.Parameters.AddWithValue("@location", location);
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+    }
 }

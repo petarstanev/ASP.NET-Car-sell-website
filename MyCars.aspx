@@ -12,7 +12,6 @@
             <br />
             <asp:TextBox ID="TextBoxModel" CssClass="form-control" placeholder="Model" runat="server"></asp:TextBox>
             <br />
-
             <asp:TextBox ID="TextBoxColour" CssClass="form-control" placeholder="Colour" runat="server"></asp:TextBox>
             <br/>
             <asp:TextBox ID="TextBoxLocation" CssClass="form-control" placeholder="Location" runat="server"></asp:TextBox>

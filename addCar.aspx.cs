@@ -21,7 +21,7 @@ public partial class addCar : System.Web.UI.Page
         User user = (User)Session["user"];
         Car car = new Car(DropDownListTypes.SelectedValue, TextBoxMake.Text, TextBoxModel.Text, TextBoxColour.Text, Int32.Parse(TextBoxPrice.Text), Int32.Parse(TextBoxYear.Text), TextBoxLocation.Text, user.id);
 
-        if (FileUploadImage.HasFile == true)
+        if (FileUploadImage.HasFile)
         {
             foreach (var file in FileUploadImage.PostedFiles)
             {

@@ -5,19 +5,28 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="form-group">
         <div class="col-md-6" id="images" runat="server">
-            <asp:GridView ID="GridView1" HeaderStyle="hiden" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1">
+            <asp:GridView ID="GridView1" HeaderStyle="hiden" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="id">
                 <Columns>
-                    <asp:ImageField DataImageUrlField="url"  HeaderText="image" NullImageUrl="~/images/no-image.gif" ControlStyle-CssClass="img-thumbnail">
-                <ControlStyle CssClass="img-thumbnail"></ControlStyle>
-            </asp:ImageField>
+                    <asp:BoundField DataField="id" HeaderText="id" Visible="False" ReadOnly="True" InsertVisible="False" SortExpression="id"></asp:BoundField>
+                    <asp:ImageField DataImageUrlField="image_url" HeaderText="image" NullImageUrl="~/images/no-image.gif" ControlStyle-CssClass="img-thumbnail">
+                        <ControlStyle CssClass="img-thumbnail"></ControlStyle>
+                    </asp:ImageField>
+                   
                     <asp:CommandField ShowDeleteButton="True"></asp:CommandField>
                 </Columns>
             </asp:GridView>
-            <asp:ObjectDataSource runat="server" ID="ObjectDataSource1" SelectMethod="getImages" TypeName="Car">
+
+
+            <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' DeleteCommand="DeleteImage" DeleteCommandType="StoredProcedure" SelectCommand="GetCarImages" SelectCommandType="StoredProcedure">
+                <DeleteParameters>
+                    <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
+                </DeleteParameters>
                 <SelectParameters>
-                    <asp:QueryStringParameter QueryStringField="id" Name="id" Type="Int32"></asp:QueryStringParameter>
+                    <asp:QueryStringParameter QueryStringField="id" Name="car_id" Type="Int32"></asp:QueryStringParameter>
                 </SelectParameters>
-            </asp:ObjectDataSource>
+            </asp:SqlDataSource>
+            <asp:FileUpload ID="FileUploadImage" runat="server" />
+            <asp:Button ID="ButtonAddImage" runat="server" CssClass="btn bg-info" Text="Add Image" OnClick="ButtonAddImage_Click" />
         </div>
         <div class="col-md-4">
             Type:
@@ -29,17 +38,19 @@
             Model:
             <asp:TextBox ID="TextBoxModel" CssClass="form-control" runat="server"></asp:TextBox>
             <br />
-            Colour: <asp:TextBox ID="TextBoxColour" CssClass="form-control" runat="server"></asp:TextBox>
+            Colour:
+            <asp:TextBox ID="TextBoxColour" CssClass="form-control" runat="server"></asp:TextBox>
             <br />
-        </div>
-        <div class="col-md-4">
-            Price: <asp:TextBox ID="TextBoxPrice" CssClass="form-control" runat="server"></asp:TextBox>
+            Price:
+            <asp:TextBox ID="TextBoxPrice" CssClass="form-control" runat="server"></asp:TextBox>
             <br />
-            Year: <asp:TextBox ID="TextBoxYear" CssClass="form-control" runat="server"></asp:TextBox>
+            Year:
+            <asp:TextBox ID="TextBoxYear" CssClass="form-control" runat="server"></asp:TextBox>
             <br />
-            Location: <asp:TextBox ID="TextBoxLocation" CssClass="form-control" placeholder="Location" runat="server"></asp:TextBox>
+            Location:
+            <asp:TextBox ID="TextBoxLocation" CssClass="form-control" placeholder="Location" runat="server"></asp:TextBox>
             <br />
-            <asp:Button ID="ButtonEdit" CssClass="btn btn-lg btn-primary col-md-offset-2" runat="server" Text="Edit"  />
+            <asp:Button ID="ButtonUpdate" CssClass="btn btn-lg btn-primary" runat="server" Text="Update" OnClick="ButtonUpdate_Click" />
         </div>
     </div>
 </asp:Content>
