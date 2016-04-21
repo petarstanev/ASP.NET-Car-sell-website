@@ -9,6 +9,7 @@ public partial class CarDetails : System.Web.UI.Page
 {
     Car car;
     WishCarCollection wishList;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.QueryString["Id"] != null)
@@ -49,6 +50,18 @@ public partial class CarDetails : System.Web.UI.Page
                 }
 
             }
+            if (Session["user"] == null || car.buyer_id > 0)
+            {
+                ButtonMakeOffer.Visible = false;
+                ButtonAddtoWishlist.Visible = false;
+                TextBoxWishListComment.Visible = false;
+                if (Session["user"] == null)
+                    LabelLoginWarning.Visible = true;
+
+                if (car.buyer_id > 0)
+                    LabelCarSold.Visible = true;
+            }
+
         }
         else
         {
@@ -57,19 +70,14 @@ public partial class CarDetails : System.Web.UI.Page
     }
     protected void ButtonAddtoWishlist_Click(object sender, EventArgs e)
     {
-        if (Session["User"] != null)
-        {
-            WishCar wishCar = new WishCar(car.id, TextBoxWishListComment.Text);
-            wishList.Add(wishCar);
-            Session["WishList"] = wishList;
-            ButtonAddtoWishlist.Visible = false;
-            TextBoxWishListComment.Visible = false;
-            ButtonRemoveFromWishList.Visible = true;
-        }
-        else
-        {
-            LabelLoginWarning.Visible = true;
-        }
+
+        WishCar wishCar = new WishCar(car.id, TextBoxWishListComment.Text);
+        wishList.Add(wishCar);
+        Session["WishList"] = wishList;
+        ButtonAddtoWishlist.Visible = false;
+        TextBoxWishListComment.Visible = false;
+        ButtonRemoveFromWishList.Visible = true;
+
     }
     protected void ButtonRemoveFromWishList_Click(object sender, EventArgs e)
     {
@@ -80,4 +88,8 @@ public partial class CarDetails : System.Web.UI.Page
         ButtonRemoveFromWishList.Visible = false;
     }
 
+    protected void ButtonMakeOffer_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Buy.aspx?id=" + car.id);
+    }
 }

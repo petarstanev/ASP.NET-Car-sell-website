@@ -22,14 +22,16 @@
                 <br />
                 Location:<asp:Label ID="LabelLocation" runat="server" />
                 <br />
-                <asp:Button ID="ButtonMakeOffer" runat="server" CssClass="btn btn-success" Text="Make offer" />
+                <asp:Button ID="ButtonMakeOffer" runat="server" CssClass="btn btn-success" Text="Make offer" OnClick="ButtonMakeOffer_Click" />
                 <br />
                 <asp:TextBox ID="TextBoxWishListComment" placeholder="Comment for wishlist." runat="server"></asp:TextBox>
                 <br />
                 <asp:Button ID="ButtonAddtoWishlist" runat="server" CssClass="btn btn-info" Text="Add to Wish list" OnClick="ButtonAddtoWishlist_Click" />
-                <br/>
-                <asp:Label runat="server" ID="LabelLoginWarning" CssClass="text-danger" Visible="False" Text="You must login to save to wish list."></asp:Label>
-                <br/>
+                <br />
+                <asp:Label runat="server" ID="LabelLoginWarning" CssClass="text-danger" Visible="False" Text="Please login to save to wish list or make an offer."></asp:Label>
+                <br />
+                <asp:Label runat="server" ID="LabelCarSold" CssClass="text-danger" Visible="False" Text="Car is already sold."></asp:Label>
+                <br />
                 <asp:Button ID="ButtonRemoveFromWishList" runat="server" CssClass="btn btn-danger" Text="Remove from Wish list" Visible="False" OnClick="ButtonRemoveFromWishList_Click" />
             </div>
         </div>

@@ -30,6 +30,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="MyCars.aspx">My cars</a></li>
                             <li><a href="WishList.aspx">Wish list</a></li>
+                            <li><a href="BoughtAndSold.aspx">Bought And Sold</a></li>
                             <li><a href="ProfileSettings.aspx">Settings</a></li>
                         </ul>
                     </li>

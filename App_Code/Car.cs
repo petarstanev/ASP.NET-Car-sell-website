@@ -19,6 +19,7 @@ public class Car
     public int year { get; set; }
     public string location { get; set; }
     public int user_id { get; set; }
+    public int buyer_id { get; set; }
 
 
     public Car(int id, string type, string make, string model, string colour, int price, int year, string location, int user_id)
@@ -120,6 +121,14 @@ public class Car
             price = reader.GetInt32(4);
             year = reader.GetInt32(5);
             location = reader.GetString(6);
+            if (!reader.IsDBNull(8))
+            {
+                buyer_id = reader.GetInt32(8);
+            }
+            else
+            {
+                buyer_id = 0;
+            }
             do
             {
                 if (!reader.IsDBNull(7))
@@ -129,6 +138,7 @@ public class Car
                 }
             } while (reader.Read());
             GetMainImageUrl();
+            
         }
     }
 
