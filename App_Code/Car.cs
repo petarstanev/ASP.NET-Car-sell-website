@@ -4,6 +4,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
+/// <summary>
+/// This class is used to represent car from and to Database.
+/// </summary>
 public class Car : SQLItem
 {
     public int id { get; set; }
@@ -50,12 +53,9 @@ public class Car : SQLItem
     public Car(int car_id)
     {
         images = new List<Image>();
-        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        SqlConnection connection = new SqlConnection(cnnString);
-
-        SqlCommand command = new SqlCommand("GetCar", connection);
+        SqlCommand command = new SqlCommand("GetCar", Connection);
         command.CommandType = System.Data.CommandType.StoredProcedure;
-        connection.Open();
+        Connection.Open();
         command.Parameters.AddWithValue("@id", car_id);
         SqlDataReader reader = command.ExecuteReader();
 
@@ -135,7 +135,7 @@ public class Car : SQLItem
     {
         if (images.Count > 0)
         {
-            mainImageUrl = images[0].url;
+            mainImageUrl = images[0].Url;
         }
     }
 

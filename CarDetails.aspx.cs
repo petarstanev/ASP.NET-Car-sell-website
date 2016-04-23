@@ -27,7 +27,7 @@ public partial class CarDetails : System.Web.UI.Page
             {
                 System.Web.UI.WebControls.Image pageImaage = new System.Web.UI.WebControls.Image();
                 pageImaage.CssClass = "image-responsive col-xs-12";
-                pageImaage.ImageUrl = image.url;
+                pageImaage.ImageUrl = image.Url;
                 images.Controls.Add(pageImaage);
             }
 
@@ -44,7 +44,8 @@ public partial class CarDetails : System.Web.UI.Page
                     if (carCheck.id == car.id)
                     {
                         ButtonAddtoWishlist.Visible = false;
-                        TextBoxWishListComment.Visible = false;
+                        TextBoxWishListComment.Text = carCheck.Notes;
+                        TextBoxWishListComment.ReadOnly = true;
                         ButtonRemoveFromWishList.Visible = true;
                     }
                 }
@@ -75,7 +76,7 @@ public partial class CarDetails : System.Web.UI.Page
         wishList.Add(wishCar);
         Session["WishList"] = wishList;
         ButtonAddtoWishlist.Visible = false;
-        TextBoxWishListComment.Visible = false;
+        TextBoxWishListComment.ReadOnly = true;
         ButtonRemoveFromWishList.Visible = true;
 
     }
@@ -84,7 +85,7 @@ public partial class CarDetails : System.Web.UI.Page
         wishList.RemoveCar(car);
         Session["WishList"] = wishList;
         ButtonAddtoWishlist.Visible = true;
-        TextBoxWishListComment.Visible = true;
+        TextBoxWishListComment.ReadOnly = false;
         ButtonRemoveFromWishList.Visible = false;
     }
 

@@ -168,6 +168,11 @@ public abstract class CarCollection : List<Car>
         return this;
     }
 
+    public List<Car> GetAllUnsorted()
+    {
+        return this;
+    }
+
     protected void ReadCar(SqlDataReader reader)
     {
         Car car = new Car(reader.GetInt32(0), reader.GetString(2), reader.GetString(3), reader.GetString(4),

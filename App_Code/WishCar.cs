@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 /// <summary>
-/// Summary description for WishCar
+/// Extends Car and add notes when user is adding car to wish list.
 /// </summary>
 public class WishCar : Car
 {
-    public string notes{get;set;}
+    public string Notes{get;set;}
     
     public WishCar(int car_id, String notes)
         : base(car_id)
 	{
-        this.notes = notes;
+        this.Notes = notes;
 	}
 
 

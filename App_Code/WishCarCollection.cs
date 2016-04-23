@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for WishListCollection
+/// WishList is collection from WishCars.
 /// </summary>
 public class WishCarCollection : List<WishCar>
 {
@@ -62,7 +61,7 @@ public class WishCarCollection : List<WishCar>
                 sortedCars = isDescending ? this.OrderByDescending(o => o.location).ToList() : this.OrderBy(o => o.location).ToList();
                 break;
             case "notes":
-                sortedCars = isDescending ? this.OrderByDescending(o => o.notes).ToList() : this.OrderBy(o => o.notes).ToList();
+                sortedCars = isDescending ? this.OrderByDescending(o => o.Notes).ToList() : this.OrderBy(o => o.Notes).ToList();
                 break;
         }
 

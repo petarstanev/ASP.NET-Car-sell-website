@@ -1,41 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 /// <summary>
 /// Image is used in List collection of images for Car.
 /// </summary>
-public class Image 
+public class Image : SQLItem
 {
-    public string url { get; set; }
+    public string Url { get; set; }
 
     public Image(string url)
     {
-        this.url = url;
+        this.Url = url;
     }
 
     public void Upload(int car_id)
     {
-        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(cnnString))
-        {
-            using (SqlCommand cmd = new SqlCommand("AddImage"))
-            {
-                using (SqlDataAdapter sda = new SqlDataAdapter())
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@car_id", car_id);
-                    cmd.Parameters.AddWithValue("@image_url", url);
-                    cmd.Connection = con;
-                    con.Open();
-                    cmd.ExecuteScalar();
-                    con.Close();
-                }
-            }
-        }
+        SqlCommand command = new SqlCommand("AddImage", Connection);
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+        command.CommandType = CommandType.StoredProcedure;
+        command.Parameters.AddWithValue("@car_id", car_id);
+        command.Parameters.AddWithValue("@image_url", Url);
+        command.Connection = Connection;
+        Connection.Open();
+        command.ExecuteScalar();
+        Connection.Close();
+
     }
 }

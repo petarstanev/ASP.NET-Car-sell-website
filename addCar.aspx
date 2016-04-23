@@ -4,7 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <h2>Add new car:</h2>
-    Type:
+
+    <asp:Label ID="LabelType" runat="server" CssClass="col-md-1" Text="Type:"></asp:Label>
     <asp:DropDownList ID="DropDownListTypes" runat="server">
         <asp:ListItem Text="Sports" Value="Sports"></asp:ListItem>
         <asp:ListItem Text="Saloon" Value="Saloon"></asp:ListItem>
@@ -12,25 +13,31 @@
         <asp:ListItem Text="Cabriolet" Value="Cabriolet"></asp:ListItem>
     </asp:DropDownList>
     <br />
-    Make:<asp:TextBox ID="TextBoxMake" runat="server"></asp:TextBox>
+    <asp:Label ID="LabelMake" runat="server" CssClass="col-md-1" Text="Make:"></asp:Label>
+    <asp:TextBox ID="TextBoxMake" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="RequiredFieldValidatorMake" runat="server" ErrorMessage="Please enter make!" ControlToValidate="TextBoxMake"></asp:RequiredFieldValidator>
     <br />
-    Model:<asp:TextBox ID="TextBoxModel" runat="server"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please enter model!" ControlToValidate="TextBoxModel"></asp:RequiredFieldValidator>
+    <asp:Label ID="LabelModel" runat="server" CssClass="col-md-1" Text="Model:"></asp:Label>
+    <asp:TextBox ID="TextBoxModel" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidatorModel" runat="server" ErrorMessage="Please enter model!" ControlToValidate="TextBoxModel"></asp:RequiredFieldValidator>
     <br />
-    Colour:
+    <asp:Label ID="LabelColour" runat="server" CssClass="col-md-1" Text="Colour:"></asp:Label>
     <asp:TextBox ID="TextBoxColour" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="RequiredFieldValidatorColour" runat="server" ErrorMessage="Please enter colour!" ControlToValidate="TextBoxColour"></asp:RequiredFieldValidator>
     <br />
-    Picture: <asp:FileUpload ID="FileUploadImage" Text="Upload" AllowMultiple="true" runat="server" />
+    <asp:Label ID="LabelPicture" runat="server" CssClass="col-md-1" Text="Picture:"></asp:Label>
+    <asp:FileUpload ID="FileUploadImage" Text="Upload" AllowMultiple="true" runat="server" />
     <br />
-    Price:<asp:TextBox ID="TextBoxPrice" runat="server"></asp:TextBox>
+    <asp:Label ID="LabelPrice" runat="server" CssClass="col-md-1" Text="Price:"></asp:Label>
+    <asp:TextBox ID="TextBoxPrice" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="RequiredFieldValidatorPrice" runat="server" ErrorMessage="Please enter price!" ControlToValidate="TextBoxPrice"></asp:RequiredFieldValidator>
     <br />
-     Year of registration:<asp:TextBox ID="TextBoxYear" runat="server"></asp:TextBox>
+    <asp:Label ID="LabelYear" runat="server" CssClass="col-md-1" Text="Year:"></asp:Label>
+    <asp:TextBox ID="TextBoxYear" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="RequiredFieldValidatorYear" runat="server" ErrorMessage="Please enter year!" ControlToValidate="TextBoxYear"></asp:RequiredFieldValidator>
     <br />
-     Location:<asp:TextBox ID="TextBoxLocation" runat="server"></asp:TextBox>
+    <asp:Label ID="LabelLocation" runat="server" CssClass="col-md-1" Text="Location:"></asp:Label>
+    <asp:TextBox ID="TextBoxLocation" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="RequiredFieldValidatorLocation" runat="server" ErrorMessage="Please enter location!" ControlToValidate="TextBoxLocation"></asp:RequiredFieldValidator>
     <br />
     <asp:Button ID="ButtonAddCar" CssClass="btn btn-primary" runat="server" Text="Add" OnClick="ButtonAddCar_Click" />

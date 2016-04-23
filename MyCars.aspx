@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="MyCars.aspx.cs" Inherits="MyCars" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-        <div class="form-group">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="form-group">
         <div class="col-md-4">
 
             <asp:TextBox ID="TextBoxType" CssClass="form-control" placeholder="Type" runat="server"></asp:TextBox>
@@ -13,9 +13,9 @@
             <asp:TextBox ID="TextBoxModel" CssClass="form-control" placeholder="Model" runat="server"></asp:TextBox>
             <br />
             <asp:TextBox ID="TextBoxColour" CssClass="form-control" placeholder="Colour" runat="server"></asp:TextBox>
-            <br/>
+            <br />
             <asp:TextBox ID="TextBoxLocation" CssClass="form-control" placeholder="Location" runat="server"></asp:TextBox>
-            <br/>
+            <br />
         </div>
         <div class="col-md-4">
             <asp:TextBox ID="TextBoxPriceStarting" CssClass="form-control" placeholder="Starting Price" runat="server"></asp:TextBox>
@@ -28,7 +28,7 @@
             <asp:Button ID="ButtonSearch" CssClass="btn btn-lg btn-primary col-md-offset-2" runat="server" Text="Search" />
         </div>
     </div>
-    <asp:GridView ID="GridViewCars" runat="server" CssClass="table table-striped" UseAccessibleHeader="True"  AutoGenerateColumns="False" DataSourceID="ObjectDataSource1" AllowSorting="True" AllowPaging="True" GridLines="None">
+    <asp:GridView ID="GridViewCars" runat="server" CssClass="table table-striped" UseAccessibleHeader="True" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1" AllowSorting="True" AllowPaging="True" GridLines="None">
         <Columns>
             <asp:BoundField HeaderText="type" DataField="type" SortExpression="type"></asp:BoundField>
             <asp:ImageField DataImageUrlField="mainImageUrl" ItemStyle-Height="120" ItemStyle-Width="160" HeaderText="image" NullImageUrl="~/images/no-image.gif" ControlStyle-CssClass="img-thumbnail">

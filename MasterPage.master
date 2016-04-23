@@ -22,7 +22,7 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="AdvanceSearch.aspx">Cars</a></li>
-                    <li id="addCar" runat="server" role="presentation"><a href="addCar.aspx">Add car</a></li>
+                    <li id="addCar" runat="server" role="presentation"><a href="AddCar.aspx">Add car</a></li>
 
                     <li id="profile" runat="server" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile
@@ -30,7 +30,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="MyCars.aspx">My cars</a></li>
                             <li><a href="WishList.aspx">Wish list</a></li>
-                            <li><a href="BoughtAndSold.aspx">Bought And Sold</a></li>
+                            <li><a href="Trades.aspx">Bought And Sold</a></li>
                             <li><a href="ProfileSettings.aspx">Settings</a></li>
                         </ul>
                     </li>
@@ -44,10 +44,10 @@
         </nav>
 
         <div class="container">
-            
+            <div class="row">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
-            
+            </div>
             <div class="footer">
                 <p class="text-muted small text-center">
                     Petar Stanev 2016. <a href="http://www.salford.ac.uk/">University of Salford.</a>

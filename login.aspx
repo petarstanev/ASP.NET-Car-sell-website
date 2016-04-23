@@ -4,8 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="form-signin">
-        <h2>
-            <asp:Label ID="LabelLogin" runat="server" Text="Please login:"></asp:Label></h2>
+        <h2><asp:Label ID="LabelLogin" runat="server" Text="Please login:"></asp:Label></h2>
         <br />
         <asp:Label ID="LabelFailed" runat="server" Text=""></asp:Label>
         <br />

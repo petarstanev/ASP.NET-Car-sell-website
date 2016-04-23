@@ -7,9 +7,9 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for Payment
+/// Class to represent Payment for for selling car.
 /// </summary>
-public class Payment
+public class Payment : SQLItem
 {
     private string cardNumber { get; set; }
     private string securityNumber { get; set; }
@@ -40,19 +40,14 @@ public class Payment
     public void MakeThePayment()
     {
 
-        var constring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        SqlCommand command = new SqlCommand("UpdateCarWithBuyer", Connection);
+        command.CommandType = System.Data.CommandType.StoredProcedure;
 
-        using (SqlConnection con = new SqlConnection(constring))
-        {
-            using (SqlCommand cmd = new SqlCommand("UpdateCarWithBuyer", con))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id", car_id);
-                cmd.Parameters.AddWithValue("@buyer_id", buyer_id);
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-        }
+        command.CommandType = CommandType.StoredProcedure;
+        command.Parameters.AddWithValue("@id", car_id);
+        command.Parameters.AddWithValue("@buyer_id", buyer_id);
+        Connection.Open();
+        command.ExecuteNonQuery();
+        Connection.Close();
     }
 }

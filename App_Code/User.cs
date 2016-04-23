@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
 
 /// <summary>
-/// Summary description for User
+/// This class is used to represent user from Database.
 /// </summary>
-public class User
+public class User : SQLItem
 {
     public int id { get; set; }
     public string email { get; set; }
@@ -34,7 +32,7 @@ public class User
         offersReceived = new List<Car>();
     }
 
-    public User(int id , String email, String password, String address, String mobile)
+    public User(int id, String email, String password, String address, String mobile)
     {
         this.id = id;
         this.email = email;
@@ -55,25 +53,19 @@ public class User
 
     public void Register()
     {
-        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        using (SqlConnection con = new SqlConnection(cnnString))
-        {
-            using (SqlCommand cmd = new SqlCommand("AddUser"))
-            {
-                using (SqlDataAdapter sda = new SqlDataAdapter())
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", passwordHash);
-                    cmd.Parameters.AddWithValue("@address", address);
-                    cmd.Parameters.AddWithValue("@mobile", mobile);
-                    cmd.Connection = con;
-                    con.Open();
-                    cmd.ExecuteScalar();
-                    con.Close();
-                }
-            }
-        }
+
+        SqlCommand command = new SqlCommand("AddUser", Connection);
+        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+        command.CommandType = CommandType.StoredProcedure;
+        command.Parameters.AddWithValue("@email", email);
+        command.Parameters.AddWithValue("@password", passwordHash);
+        command.Parameters.AddWithValue("@address", address);
+        command.Parameters.AddWithValue("@mobile", mobile);
+        command.Connection = Connection;
+        Connection.Open();
+        command.ExecuteScalar();
+        Connection.Close();
     }
 
     public Boolean CheckUsernameUnique()

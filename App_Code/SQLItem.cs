@@ -6,9 +6,9 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for SQLItem
+/// Abstract class to represent SQLItem used by Car, Image, Payment.
 /// </summary>
-public class SQLItem
+public abstract class SQLItem
 {
 
     private string ConnectionString { get; set; }
