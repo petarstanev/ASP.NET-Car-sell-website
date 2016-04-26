@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <h2>Payment details:</h2>
     Card type:<asp:RadioButtonList ID="RadioButtonList1" runat="server">
-        <asp:ListItem Text="Visa" Value="Visa" />
+        <asp:ListItem Text="Visa" Value="Visa" Selected="True" />
         <asp:ListItem Text="MasterCard" Value="MasterCard" />
     </asp:RadioButtonList>
     Card number(16 digits):<asp:TextBox ID="TextBoxCardNumber" runat="server"></asp:TextBox>

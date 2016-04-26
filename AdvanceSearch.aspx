@@ -5,32 +5,35 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="form-group">
         <div class="col-md-4">
-
             <asp:TextBox ID="TextBoxType" CssClass="form-control" placeholder="Type" runat="server"></asp:TextBox>
             <br />
             <asp:TextBox ID="TextBoxMake" CssClass="form-control" placeholder="Make" runat="server"></asp:TextBox>
             <br />
             <asp:TextBox ID="TextBoxModel" CssClass="form-control" placeholder="Model" runat="server"></asp:TextBox>
             <br />
-
             <asp:TextBox ID="TextBoxColour" CssClass="form-control" placeholder="Colour" runat="server"></asp:TextBox>
-            <br/>
+            <br />
             <asp:TextBox ID="TextBoxLocation" CssClass="form-control" placeholder="Location" runat="server"></asp:TextBox>
-            <br/>
+            <br />
         </div>
         <div class="col-md-4">
             <asp:TextBox ID="TextBoxPriceStarting" CssClass="form-control" placeholder="Starting Price" runat="server"></asp:TextBox>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidatorPriceStarting" runat="server" ErrorMessage="Enter only numbers!" ControlToValidate="TextBoxPriceStarting" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
             <asp:TextBox ID="TextBoxPriceMaximum" CssClass="form-control" placeholder="Maximum Price" runat="server"></asp:TextBox>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidatorPriceMaximum" runat="server" ErrorMessage="Enter only numbers!" ControlToValidate="TextBoxPriceMaximum" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
             <br />
             <br />
             <asp:TextBox ID="TextBoxYearStarting" CssClass="form-control" placeholder="Starting Year" runat="server"></asp:TextBox>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidatorYearStarting" runat="server" ErrorMessage="Enter only numbers!" ControlToValidate="TextBoxYearStarting" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
+
             <asp:TextBox ID="TextBoxYearEnding" CssClass="form-control" placeholder="Ending year" runat="server"></asp:TextBox>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidatorYearEnding" runat="server" ErrorMessage="Enter only numbers!" ControlToValidate="TextBoxYearEnding" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
             <br />
             <asp:Button ID="ButtonSearch" CssClass="btn btn-lg btn-primary col-md-offset-2" runat="server" Text="Search" OnClick="ButtonSearch_Click" />
         </div>
 
     </div>
-    <asp:GridView ID="GridViewCars" runat="server" CssClass="table table-striped" UseAccessibleHeader="True"  AutoGenerateColumns="False" DataSourceID="ObjectDataSource1" AllowSorting="True" AllowPaging="True" GridLines="None">
+    <asp:GridView ID="GridViewCars" runat="server" CssClass="table table-striped" UseAccessibleHeader="True" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1" AllowSorting="True" AllowPaging="True" GridLines="None">
         <Columns>
             <asp:BoundField HeaderText="type" DataField="type" SortExpression="type"></asp:BoundField>
             <asp:ImageField DataImageUrlField="mainImageUrl" ItemStyle-Height="120" ItemStyle-Width="160" HeaderText="image" NullImageUrl="~/images/no-image.gif" ControlStyle-CssClass="img-thumbnail">

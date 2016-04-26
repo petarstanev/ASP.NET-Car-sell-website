@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Class to represent Payment for for selling car.
+/// Class to represent Payment for selling/buying car.
 /// </summary>
 public class Payment : SQLItem
 {

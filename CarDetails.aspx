@@ -32,6 +32,8 @@
                 <br />
                 <asp:Label runat="server" ID="LabelCarSold" CssClass="text-danger" Visible="False" Text="Car is already sold."></asp:Label>
                 <br />
+                <asp:Label runat="server" ID="LabelOwnCarWarning" CssClass="text-danger" Visible="False" Text="You can not buy your own car!"></asp:Label>
+                <br />
                 <asp:Button ID="ButtonRemoveFromWishList" runat="server" CssClass="btn btn-danger" Text="Remove from Wish list" Visible="False" OnClick="ButtonRemoveFromWishList_Click" />
             </div>
         </div>

@@ -10,7 +10,7 @@
     <br />
     <asp:Label ID="LabelPasswordConfirm" CssClass="col-md-2" runat="server" Text="Password confirm: "></asp:Label>
     <asp:TextBox ID="TextBoxPasswordConfirm" runat="server" TextMode="Password"></asp:TextBox>
-    <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Enter the same password!" ControlToCompare="TextBoxPassword" ControlToValidate="TextBoxPasswordConfirm" Operator="Equal"></asp:CompareValidator>
+    <asp:CompareValidator ID="CompareValidatorPassword" runat="server" ErrorMessage="Enter the same password!" ControlToCompare="TextBoxPassword" ControlToValidate="TextBoxPasswordConfirm" Operator="Equal"></asp:CompareValidator>
     <br />
     <br />
     <asp:Label ID="LabelAddress" CssClass="col-md-2" runat="server" Text="Address: "></asp:Label>

@@ -19,7 +19,7 @@ public class Car : SQLItem
     public int price { get; set; }
     public int year { get; set; }
     public string location { get; set; }
-    private int user_id { get; set; }
+    public int user_id { get; set; }
     public int buyer_id { get; private set; }
 
 
@@ -70,6 +70,7 @@ public class Car : SQLItem
             price = reader.GetInt32(4);
             year = reader.GetInt32(5);
             location = reader.GetString(6);
+
             if (!reader.IsDBNull(8))
             {
                 buyer_id = reader.GetInt32(8);
@@ -78,6 +79,7 @@ public class Car : SQLItem
             {
                 buyer_id = 0;
             }
+            user_id = reader.GetInt32(9);
             do
             {
                 if (!reader.IsDBNull(7))
@@ -88,6 +90,11 @@ public class Car : SQLItem
             } while (reader.Read());
             GetMainImageUrl();
         }
+        Connection.Close();
+    }
+
+    public Car()
+    {
     }
 
     public void Upload()

@@ -4,14 +4,15 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="form-signin">
-        <h2><asp:Label ID="LabelLogin" runat="server" Text="Please login:"></asp:Label></h2>
+        <h2>
+            <asp:Label ID="LabelLogin" runat="server" Text="Please login:"></asp:Label></h2>
         <br />
-        <asp:Label ID="LabelFailed" runat="server" Text=""></asp:Label>
-        <br />
+
         <asp:Label ID="LabelEmail" runat="server" CssClass="col-md-2" Text="Email: "></asp:Label>
         <asp:TextBox ID="TextBoxEmail" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator ID="RequiredFieldValidatorTextBoxEmail" runat="server" ErrorMessage="Enter email!" ControlToValidate="TextBoxEmail"></asp:RequiredFieldValidator>
-        <br />
+        <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="TextBoxEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+           <br />
         <asp:Label ID="LabelPassword" CssClass="col-md-2" runat="server" Text="Password: "></asp:Label>
         <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password"></asp:TextBox>
         <asp:RequiredFieldValidator ID="RequiredFieldValidatorTextBoxPassword" runat="server" ErrorMessage="Enter password!" ControlToValidate="TextBoxPassword"></asp:RequiredFieldValidator>
@@ -23,6 +24,8 @@
         <asp:RequiredFieldValidator ID="RequiredFieldValidatorTextBoxBotCheck" runat="server" ErrorMessage="Enter the symbols!" ControlToValidate="TextBoxBotCheck"></asp:RequiredFieldValidator>
         <br />
         <asp:Button ID="ButtonLogin" CssClass="btn btn-primary" runat="server" Text="Login" OnClick="ButtonLogin_Click" />
+        <br />
+        <asp:Label ID="LabelFailed" runat="server" Text=""></asp:Label>
         <br />
         <asp:ValidationSummary ID="ValidationSummary" runat="server" />
     </div>

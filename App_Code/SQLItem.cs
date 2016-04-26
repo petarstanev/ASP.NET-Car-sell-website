@@ -6,7 +6,8 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Abstract class to represent SQLItem used by Car, Image, Payment.
+/// Abstract class to represent SQLItem that SQLConnection string
+/// Used by classes like Car to use the Database.
 /// </summary>
 public abstract class SQLItem
 {

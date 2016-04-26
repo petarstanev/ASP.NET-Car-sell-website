@@ -9,7 +9,7 @@
     </ul>
     <div id="row">
         <div id="contentTrades" runat="server">
-            <asp:GridView ID="GridViewBough" GridLines="None" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDataSourceBoughtAndSold">
+            <asp:GridView ID="GridViewBough" GridLines="None" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDataSourceBoughtAndSold" AllowPaging="True" AllowSorting="True">
                 <Columns>
                     <asp:BoundField HeaderText="type" DataField="type" SortExpression="type"></asp:BoundField>
                     <asp:ImageField DataImageUrlField="mainImageUrl" ItemStyle-Height="120" ItemStyle-Width="160" HeaderText="image" NullImageUrl="~/images/no-image.gif" ControlStyle-CssClass="img-thumbnail">
@@ -26,7 +26,7 @@
 
                 </Columns>
             </asp:GridView>
-            <asp:ObjectDataSource runat="server" ID="ObjectDataSourceBoughtAndSold" SelectMethod="GetBought" TypeName="BoughtAndSold"></asp:ObjectDataSource>
+            <asp:ObjectDataSource runat="server" ID="ObjectDataSourceBoughtAndSold" SelectMethod="GetBought" SortParameterName="sortExpression" TypeName="BoughtAndSold"></asp:ObjectDataSource>
 
             Year:
     <ul>

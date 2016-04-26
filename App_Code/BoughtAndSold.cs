@@ -19,7 +19,7 @@ public class BoughtAndSold : CarCollection
     public int TotalMoney { get; set; }
 
 
-    public List<Car> GetBought()
+    public List<Car> GetBought(string sortExpression)
     {
         Clear();
         SqlCommand command = new SqlCommand("GetBought", Connection);
@@ -40,10 +40,10 @@ public class BoughtAndSold : CarCollection
             CalculateMoney();
             CalculateYears();
         }
-        return this;
+        return GetAllNotSearched(sortExpression);
     }
 
-    public List<Car> GetSold()
+    public List<Car> GetSold(string sortExpression)
     {
         Clear();
         SqlCommand command = new SqlCommand("GetSold", Connection);
@@ -65,7 +65,8 @@ public class BoughtAndSold : CarCollection
             CalculateMoney();
             CalculateYears();
         }
-        return this;
+
+        return GetAllNotSearched(sortExpression);
     }
 
     private void CalculateMoney()

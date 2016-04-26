@@ -11,7 +11,6 @@ public partial class CarEdit : System.Web.UI.Page
     Car car;
     protected void Page_Load(object sender, EventArgs e)
     {
-
         if (Request.QueryString["Id"] != null)
         {
             int car_id = Int32.Parse(Request.QueryString["Id"]);
@@ -20,7 +19,7 @@ public partial class CarEdit : System.Web.UI.Page
             {
                 TextBoxMake.Text = car.make;
                 TextBoxModel.Text = car.model;
-                TextBoxType.Text = car.type;
+                DropDownListTypes.SelectedValue = car.type;
                 TextBoxColour.Text = car.colour;
                 TextBoxYear.Text = car.year.ToString();
                 TextBoxLocation.Text = car.location;
@@ -51,7 +50,7 @@ public partial class CarEdit : System.Web.UI.Page
     {
         car.make = TextBoxMake.Text;
         car.model = TextBoxModel.Text;
-        car.type = TextBoxType.Text;
+        car.type = DropDownListTypes.SelectedValue;
         car.colour = TextBoxColour.Text;
         car.year = Int32.Parse(TextBoxYear.Text);
         car.location = TextBoxLocation.Text;

@@ -168,8 +168,11 @@ public abstract class CarCollection : List<Car>
         return this;
     }
 
-    public List<Car> GetAllUnsorted()
+    public List<Car> GetAllNotSearched(string sortExpression)
     {
+        if (sortExpression != "")
+            return Sort(sortExpression);
+
         return this;
     }
 
