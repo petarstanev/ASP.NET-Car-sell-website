@@ -19,6 +19,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
             //user is login
             login.Visible = false;
             register.Visible = false;
+            
         }
         else
         {
@@ -26,6 +27,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
             logout.Visible = false;
             profile.Visible = false;
             addCar.Visible = false;
+            myCars.Visible = false;
+            trades.Visible = false;
+            wishList.Visible = false;
+
         }
     }
 }

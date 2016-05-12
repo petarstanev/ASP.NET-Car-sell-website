@@ -15,33 +15,36 @@
 </head>
 <body>
     <form runat="server">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
+        <div class="navbar navbar-inverse">
+            <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="Default.aspx">Car sale</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="AdvanceSearch.aspx">Cars</a>
                 </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="AdvanceSearch.aspx">Cars</a></li>
-                    <li id="addCar" runat="server" role="presentation"><a href="AddCar.aspx">Add car</a></li>
-
-                    <li id="profile" runat="server" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile
-        <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="MyCars.aspx">My cars</a></li>
-                            <li><a href="WishList.aspx">Wish list</a></li>
-                            <li><a href="Trades.aspx">Bought And Sold</a></li>
-                            <li><a href="ProfileSettings.aspx">Settings</a></li>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="AdvanceSearch.aspx">Search Cars</a></li>
+                        <li id="addCar" runat="server"><a href="AddCar.aspx">Add car</a></li>
+                            <li id="myCars" runat="server"><a href="MyCars.aspx">My cars</a></li>
+                            <li id="wishList" runat="server"><a href="WishList.aspx">Wish list</a></li>
+                            <li id="trades" runat="server"><a href="Trades.aspx">Bought And Sold</a></li>
                         </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li id="login" runat="server" role="presentation"><a href="login.aspx">Login</a></li>
-                    <li id="register" runat="server" role="presentation"><a href="register.aspx">Register</a></li>
-                    <li id="logout" runat="server" role="presentation"><a href="logout.aspx">Logout</a></li>
-                </ul>
+                    <ul class="nav navbar-nav navbar-right btn-group">
+                        <li id="profile" runat="server" role="presentation"><a href="ProfileSettings.aspx">Settings</a></li>
+                        <li id="login" runat="server" role="presentation"><a href="login.aspx">Login</a></li>
+                        <li id="register" runat="server" role="presentation"><a href="register.aspx">Register</a></li>
+                        <li id="logout" runat="server" role="presentation"><a href="logout.aspx">Logout</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
             </div>
-        </nav>
+        </div>
+
+
 
         <div class="container">
             <div class="row">

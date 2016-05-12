@@ -9,6 +9,7 @@ public partial class MyCars : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if(Session["user"]==null)
+            Response.Redirect("~/Default.aspx");
     }
 }

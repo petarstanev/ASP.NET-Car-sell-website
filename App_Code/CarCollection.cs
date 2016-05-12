@@ -70,7 +70,7 @@ public abstract class CarCollection : List<Car>
         {
             car = this[i];
 
-            if (type != "")
+            if (type != "All")
             {
                 if (!car.type.Contains(type))
                 {

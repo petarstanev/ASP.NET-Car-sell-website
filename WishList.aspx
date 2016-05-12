@@ -3,10 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <asp:Label runat="server" Text="Wish list"></asp:Label>
+    <asp:Label ID="LabelWishListEmpty" runat="server" Visible="False" Text="Wish list is empty."></asp:Label>
     <asp:GridView ID="GridViewCars" DataKeyNames="id" runat="server" CssClass="table table-responsive table-hover table-striped" AutoGenerateColumns="False" AllowSorting="True" AllowPaging="True" DataSourceID="ObjectDataSource1">
         <Columns>
-            
+
             <asp:BoundField HeaderText="type" DataField="type" SortExpression="type"></asp:BoundField>
             <asp:ImageField DataImageUrlField="mainImageUrl" ItemStyle-Height="120" ItemStyle-Width="160" HeaderText="image" NullImageUrl="~/images/no-image.gif" ControlStyle-CssClass="img-thumbnail">
                 <ControlStyle CssClass="img-thumbnail"></ControlStyle>
@@ -19,13 +19,13 @@
             <asp:BoundField DataField="location" HeaderText="location" SortExpression="location" />
             <asp:BoundField DataField="notes" HeaderText="notes" SortExpression="notes" />
             <asp:HyperLinkField AccessibleHeaderText="Link" DataNavigateUrlFields="Id" DataNavigateUrlFormatString="~/CarDetails.aspx?id={0}" HeaderText="Link" Text="link" />
-             <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
+            <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
         </Columns>
     </asp:GridView>
 
-   
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" DataObjectTypeName="Car" DeleteMethod="RemoveCar" SelectMethod="GetWishList"  TypeName="WishCarCollection" SortParameterName="sortExpression"></asp:ObjectDataSource>
 
-   
+    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" DataObjectTypeName="Car" DeleteMethod="RemoveCar" SelectMethod="GetWishList" TypeName="WishCarCollection" SortParameterName="sortExpression"></asp:ObjectDataSource>
+
+
 </asp:Content>
 

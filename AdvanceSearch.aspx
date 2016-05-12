@@ -5,7 +5,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="form-group">
         <div class="col-md-4">
-            <asp:TextBox ID="TextBoxType" CssClass="form-control" placeholder="Type" runat="server"></asp:TextBox>
+            <asp:DropDownList ID="DropDownListTypes" CssClass="form-control" runat="server">
+                <asp:ListItem Text="All types" Value="All" Selected="True"></asp:ListItem>
+                <asp:ListItem Text="Sports" Value="Sports"></asp:ListItem>
+                <asp:ListItem Text="Saloon" Value="Saloon"></asp:ListItem>
+                <asp:ListItem Text="Hatch-back" Value="Hatch-back"></asp:ListItem>
+                <asp:ListItem Text="Cabriolet" Value="Cabriolet"></asp:ListItem>
+            </asp:DropDownList>
             <br />
             <asp:TextBox ID="TextBoxMake" CssClass="form-control" placeholder="Make" runat="server"></asp:TextBox>
             <br />
@@ -54,7 +60,7 @@
     <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAll" SortParameterName="sortExpression"
         TypeName="AllCarCollection">
         <SelectParameters>
-            <asp:ControlParameter ControlID="TextBoxType" ConvertEmptyStringToNull="False" Name="type" PropertyName="Text" Type="String" />
+            <asp:ControlParameter ControlID="DropDownListTypes" ConvertEmptyStringToNull="False" Name="type" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="TextBoxMake" ConvertEmptyStringToNull="False" Name="make" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="TextBoxModel" ConvertEmptyStringToNull="False" Name="model" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="TextBoxColour" ConvertEmptyStringToNull="False" Name="colour" PropertyName="Text" Type="String" />

@@ -11,9 +11,10 @@ public partial class CarEdit : System.Web.UI.Page
     Car car;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.QueryString["Id"] != null)
+        int car_id;
+        if (Int32.TryParse(Request.QueryString["Id"], out car_id))
         {
-            int car_id = Int32.Parse(Request.QueryString["Id"]);
+           
             car = new Car(car_id);
             if (!Page.IsPostBack)
             {
@@ -25,6 +26,10 @@ public partial class CarEdit : System.Web.UI.Page
                 TextBoxLocation.Text = car.location;
                 TextBoxPrice.Text = car.price.ToString();
             }
+        }
+        else
+        {
+            Response.Redirect("AdvanceSearch.aspx");
         }
     }
 

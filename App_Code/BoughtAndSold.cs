@@ -10,7 +10,7 @@ using System.Web;
 public class BoughtAndSold : CarCollection
 {
     public int MinYear { get; set; }
-    public double AverageYear { get; set; }
+    public int AverageYear { get; set; }
     public int MaxYear { get; set; }
 
     public int MinMoney { get; set; }
@@ -81,7 +81,7 @@ public class BoughtAndSold : CarCollection
     private void CalculateYears()
     {
         MinYear = this.Min(car => car.year);
-        AverageYear = this.Average(car => car.year);
+        AverageYear = Convert.ToInt32(this.Average(car => car.year));
         MaxYear = this.Max(car => car.year);
     }
 

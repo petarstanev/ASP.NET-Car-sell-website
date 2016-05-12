@@ -39,7 +39,7 @@ public class Payment : SQLItem
 
     public void MakeThePayment()
     {
-
+        //update database
         SqlCommand command = new SqlCommand("UpdateCarWithBuyer", Connection);
         command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -49,5 +49,10 @@ public class Payment : SQLItem
         Connection.Open();
         command.ExecuteNonQuery();
         Connection.Close();
+
+        //remove from wish list
+        Car car = new Car(car_id);
+        WishCarCollection wishCollection = new WishCarCollection();
+        wishCollection.RemoveCar(car);
     }
 }

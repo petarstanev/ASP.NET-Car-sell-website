@@ -42,8 +42,9 @@ public partial class login_form : System.Web.UI.Page
             Response.Redirect("login_success.aspx");
             
         }
-        else {
-            LabelFailed.Text = "Wrong email or password !";
+        else
+        {
+            LabelFailed.Visible = true;
         }
     }
 }
